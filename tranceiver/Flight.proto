@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package FlightTracker;
+
+message Flight {
+   int32 flightId = 1;
+   int32 altitude = 2;
+   int32 speed = 3;
+   double angle = 4;
+   string sendTime = 5;
+   double longitude = 6;
+   double latitude = 7;  
+}
