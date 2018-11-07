@@ -46,7 +46,7 @@ Route::get('logout' , function (){
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/dashboard',function (){
-        dd('Dashboard is Here');
+        return view('dashboard');
     });
 });
 
