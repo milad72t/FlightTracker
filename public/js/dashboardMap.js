@@ -1,7 +1,7 @@
 $(document).ready(function(){
     var mapOptions = {
-        center: [28.363816, -81.569289],
-        zoom: 5
+        center: [19.093266636089712, -102.249755859375],
+        zoom: 7
     };
     var map = new L.map('map', mapOptions);
     var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
@@ -14,7 +14,7 @@ $(document).ready(function(){
         fetchData(map);
     });
     map.on('click', function(e) {
-        // console.log(e);
+        console.log(e,map.getBounds());
     });
 });
 
@@ -29,17 +29,19 @@ function addMarker(map) {
         +'&north='+map.getBounds().getNorth()+'&south='+map.getBounds().getSouth(),
         function(data,status){
             removeMarkers(map);
-            // console.log(new Date().getTime()-ajaxTime);
+            console.log(new Date().getTime()-ajaxTime);
+            // console.log(data.data);
             $.each(data.data, function (index, element) {
                 var iconOptions = {
                     iconUrl: '/images/f-icon.png',
-                    iconSize: [30, 30]
+                    iconSize: [50, 50]
                 };
                 var customIcon = L.icon(iconOptions);
                 var marker = new L.Marker([element.latitude, element.longitude],{
                     title:'ارتفاع : '+ element.altitude+' , سرعت : '+element.speed+' , زاویه : '+element.angle,
                     riseOnHover	: true,
                     name : 'marker',
+                    rotationAngle: element.angle,
                     icon: customIcon
                 });
                 marker.addTo(map);
