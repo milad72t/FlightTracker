@@ -13,14 +13,14 @@ udpSocket = socket(AF_INET, SOCK_DGRAM)
 
 def SerializeString(record):
   Flight = Flight_pb2.Flight()
-  randomFlightId = randint(1,15)
+  randomFlightId = randint(1,20)
   Flight.flightId = randomFlightId
   Flight.altitude = randint(100,20000)
   Flight.speed = randint(100,400)
   Flight.angle = randint(0,360)
   Flight.sendTime = strftime("%Y-%m-%d %H:%M:%S", gmtime())
-  Flight.latitude = float(record[0]) + ((7 - randomFlightId)*2)
-  Flight.longitude = float(record[1]) + ((7 - randomFlightId)*2)
+  Flight.latitude = float(record[0]) + ((10 - randomFlightId)*4)
+  Flight.longitude = float(record[1]) + ((10 - randomFlightId)*10)
   return Flight.SerializeToString()
 
 
@@ -30,7 +30,7 @@ for record in records:
 	if record[0] == 'lat':
 		continue
 	udpSocket.sendto(SerializeString(record),(host, port))
-	# sleep(2)
+	sleep(0.02)
 	# decoded = Flight_pb2.Flight()
 	# decoded.ParseFromString(SerializeString(record))
 	# print decoded
