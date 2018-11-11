@@ -13,14 +13,7 @@
 
 
 Route::get('/test', function () {
-    dd(\Illuminate\Support\Facades\Auth::user());
-    $user = new \App\User();
-    $user->firstName = 'میلاد';
-    $user->lastName = 'تیموری';
-    $user->username = 'milad';
-    $user->password = \Illuminate\Support\Facades\Hash::make('123456' );
-//    $user->save();
-    dd($user);
+    dd('Done');
 });
 
 

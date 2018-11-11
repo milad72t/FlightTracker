@@ -23,6 +23,7 @@ function fetchData(map) {
     addMarker(map);
 }
 
+
 function addMarker(map) {
     var ajaxTime= new Date().getTime();
     $.get('/api/getLiveFlightsLog?east='+map.getBounds().getEast()+'&west='+map.getBounds().getWest()
@@ -38,12 +39,12 @@ function addMarker(map) {
                 };
                 var customIcon = L.icon(iconOptions);
                 var marker = new L.Marker([element.latitude, element.longitude],{
-                    title:'ارتفاع : '+ element.altitude+' , سرعت : '+element.speed+' , زاویه : '+element.angle,
+                    title: element.flightNumber+"\n"+'ارتفاع : ' + element.altitude+"\n"+' سرعت : '+element.speed+"\n"+" زاویه : "+element.angle,
                     riseOnHover	: true,
                     name : 'marker',
                     rotationAngle: element.angle,
                     icon: customIcon
-                });
+                }).on('click',markerOnClick);
                 marker.addTo(map);
             });
         });
@@ -55,4 +56,8 @@ function removeMarkers(map) {
             map.removeLayer(layer);
         }
     });
+}
+
+function markerOnClick(e) {
+    alert("hi. you clicked the marker at " + e.target.options.name);
 }

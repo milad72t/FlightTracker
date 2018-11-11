@@ -2,37 +2,44 @@
 
 namespace App\Http\Controllers;
 
-use App\FlightLog;
+use App\Flight;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use DB;
 
 class FlightLogController extends Controller
 {
 
+    public function isPointInsideWindow($lat,$long,$request){
+        if($lat > $request->input('south') && $lat < $request->input('north') &&
+            $long > $request->input('west') && $long < $request->input('east')){
+            return true;
+        }
+        return false;
+    }
+
     public function apiGetLiveFlightsLog(Request $request){
-        $flightLogs_ = FlightLog::
-            where('latitude','>',$request->input('south'))->
-            where('latitude','<',$request->input('north'))->
-            where('longitude','>',$request->input('west'))->
-            where('longitude','<',$request->input('east'))->
-            whereNotExists(function ($query){
-                $query->select(DB::raw(1))
-                    ->from('flight_logs as temp')
-                    ->whereRaw('temp.flightId = flight_logs.flightId')
-                    ->whereRaw('temp.sendTime > flight_logs.sendTime');
-            })->select('flightId','sendTime','altitude','speed','angle','latitude','longitude')->get()->unique('flightId');
-//        $flightResponse = [];
-//        foreach ($flightLogs as $flightLog){
-//            if(!array_key_exists($flightLog->flightId,$flightResponse)) {
-//                $flightResponse[$flightLog->flightId] = $flightLog->toArray();
-//            }elseif ($flightResponse[$flightLog->flightId]['sendTime'] < $flightLog->sendTime){
-//                $flightResponse[$flightLog->flightId] = $flightLog->toArray();
-//            }
-//        }
+        $flightLogs = Flight::with('lastFlightLog')->
+            where('finished',false)->select('id','flightNumber','airlineId'
+                ,'airPlaneId','sourceAirportId','destinationAirportId','departureTime')->get();
+        $response = [];
+        foreach ($flightLogs as $flightLog){
+            if($flightLog->lastFlightLog){
+                if($this->isPointInsideWindow($flightLog->lastFlightLog->latitude,$flightLog->lastFlightLog->longitude,$request)){
+                    array_push($response , [
+                        'flightId' => $flightLog->id,
+                        'flightNumber' => $flightLog->flightNumber,
+                        'altitude' => $flightLog->lastFlightLog->altitude,
+                        'speed' => $flightLog->lastFlightLog->speed,
+                        'angle' => $flightLog->lastFlightLog->angle,
+                        'latitude' => $flightLog->lastFlightLog->latitude,
+                        'longitude' => $flightLog->lastFlightLog->longitude
+                    ]);
+                }
+            }
+        }
         return response()->json([
             'status' => 200,
-            'data' => $flightLogs_
+            'data' => $response
         ]);
 
     }
