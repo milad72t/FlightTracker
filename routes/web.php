@@ -13,7 +13,7 @@
 
 
 Route::get('/test', function () {
-    dd('Done');
+
 });
 
 

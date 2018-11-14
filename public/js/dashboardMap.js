@@ -31,20 +31,35 @@ function addMarker(map) {
         function(data,status){
             removeMarkers(map);
             console.log(new Date().getTime()-ajaxTime);
-            // console.log(data.data);
-            $.each(data.data, function (index, element) {
-                var iconOptions = {
-                    iconUrl: '/images/f-icon.png',
-                    iconSize: [50, 50]
-                };
-                var customIcon = L.icon(iconOptions);
+            // console.log(data.airports);
+            var flightIcon = {
+                iconUrl: '/images/f-icon.png',
+                iconSize: [50, 50]
+            };
+            var customFlightIcon = L.icon(flightIcon);
+            $.each(data.flights, function (index, element) {
                 var marker = new L.Marker([element.latitude, element.longitude],{
                     title: element.flightNumber+"\n"+'ارتفاع : ' + element.altitude+"\n"+' سرعت : '+element.speed+"\n"+" زاویه : "+element.angle,
                     riseOnHover	: true,
                     name : 'marker',
                     rotationAngle: element.angle,
-                    icon: customIcon
+                    icon: customFlightIcon,
+                    flightId : element.flightId
                 }).on('click',markerOnClick);
+                marker.addTo(map);
+            });
+            var airportIcon = {
+                iconUrl: '/images/airport-icon.png',
+                iconSize: [25, 25]
+            };
+            var customAirportIcon = L.icon(airportIcon);
+            $.each(data.airports, function (index, element) {
+                var marker = new L.Marker([element.latitude, element.longitude],{
+                    title: element.name,
+                    name : 'marker',
+                    icon: customAirportIcon,
+                    airportId : element.id
+                }).on('click',airportClick);
                 marker.addTo(map);
             });
         });
@@ -59,5 +74,9 @@ function removeMarkers(map) {
 }
 
 function markerOnClick(e) {
-    alert("hi. you clicked the marker at " + e.target.options.name);
+    alert("hi. you clicked the marker at " + e.target.options.flightId);
+}
+
+function airportClick(e) {
+    alert("hi. you clicked the airport at " + e.target.options.airportId);
 }

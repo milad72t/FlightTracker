@@ -2,12 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\AirPort;
 use App\Flight;
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\Cache;
 
 class FlightLogController extends Controller
 {
+
+    public function getActiveAirportsInfo($request){
+        $airports = Cache::remember('ActiveAirportsInfo',60*24*7,function (){
+            return AirPort::where('active',true)->select('id','name','latitude','longitude')->get();
+        });
+        foreach ($airports as $key=>$airport ){
+            if(!($airport->latitude > $request->input('south') && $airport->latitude < $request->input('north') &&
+                $airport->longitude > $request->input('west') && $airport->longitude < $request->input('east'))){
+                $airports->forget($key);
+            }
+        }
+        return $airports;
+    }
 
     public function isPointInsideWindow($lat,$long,$request){
         if($lat > $request->input('south') && $lat < $request->input('north') &&
@@ -39,7 +54,8 @@ class FlightLogController extends Controller
         }
         return response()->json([
             'status' => 200,
-            'data' => $response
+            'flights' => $response,
+            'airports' => $this->getActiveAirportsInfo($request)
         ]);
 
     }
