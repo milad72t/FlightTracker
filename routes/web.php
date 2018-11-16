@@ -31,7 +31,7 @@ Route::get('/login',function (){
 
 Route::post('/login', 'AuthController@postLoginPage');
 
-Route::get('logout' , function (){
+Route::get('/logout' , function (){
     session()->flush();
     Auth::logout();
     return redirect('/login');
@@ -40,9 +40,6 @@ Route::get('logout' , function (){
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/simpleView',function (){
         return view('test');
-    });
-    Route::get('/index',function (){
-        return view('index');
     });
     Route::get('/dashboard',function (){
         return view('dashboard');

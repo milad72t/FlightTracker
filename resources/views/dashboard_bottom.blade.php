@@ -1,7 +1,5 @@
 
 </div>
-<!-- /page content -->
-
 
 <!-- footer content -->
 <footer>
@@ -11,14 +9,12 @@
 <div class="clearfix"></div>
 </footer>
 <!-- /footer content -->
-</div>
-</div>
 
 <!-- jQuery -->
 <script src="/vendors/jquery/dist/jquery.min.js"></script>
+
 <!-- Bootstrap -->
 <script src="/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-
 <script type="text/javascript" src="/js/bootstrap-multiselect.js"></script>
 
 <!-- FastClick -->
@@ -26,11 +22,11 @@
 <!-- NProgress -->
 <script src="/vendors/nprogress/nprogress.js"></script>
 <!-- Chart.js -->
-<script src="/vendors/Chart.js/dist/Chart.min.js"></script>
+{{--<script src="/vendors/Chart.js/dist/Chart.min.js"></script>--}}
 <!-- gauge.js -->
 <script src="/vendors/gauge.js/dist/gauge.min.js"></script>
 <!-- bootstrap-progressbar -->
-<script src="/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+{{--<script src="/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>--}}
 <!-- iCheck -->
 <script src="/vendors/iCheck/icheck.min.js"></script>
 <!-- Skycons -->
@@ -45,18 +41,22 @@
 <script src="/vendors/raphael/raphael.min.js"></script>
 <script src="/vendors/morris.js/morris.js"></script>
 
-
 <!-- Flot plugins -->
 <script src="/vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
 <script src="/vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
 <script src="/vendors/flot.curvedlines/curvedLines.js"></script>
+
 <!-- DateJS -->
 <script src="/vendors/DateJS/build/date.js"></script>
-<script src="/vendors/iranmap/js/iranmap.js"></script>
 
 
 <!-- Custom Theme Scripts -->
 <script src="/build/js/custom.js"></script>
 <script src="/build/js/persianumber.js"></script>
-
 <script src="/js/dashboard_top.js"></script>
+
+<!-- Leaflet Related -->
+<link rel = "stylesheet" href = "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css"/>
+<script src = "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+<script src="/js/leaflet.rotatedMarker.js"></script>
+<script type="text/javascript" src="/js/dashboardMap.js"></script>
