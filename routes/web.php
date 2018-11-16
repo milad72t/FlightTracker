@@ -38,6 +38,12 @@ Route::get('logout' , function (){
 });
 
 Route::group(['middleware' => ['auth']], function () {
+    Route::get('/simpleView',function (){
+        return view('test');
+    });
+    Route::get('/index',function (){
+        return view('index');
+    });
     Route::get('/dashboard',function (){
         return view('dashboard');
     });
