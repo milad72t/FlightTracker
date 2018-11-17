@@ -21,3 +21,5 @@ Route::post('/login', 'AuthController@apiLogin');
 
 Route::get('getLiveFlightsLog' , 'FlightLogController@apiGetLiveFlightsLog');
 
+Route::get('getFlightInfo/{flightId}','FlightController@apiGetFlightInfo');
+

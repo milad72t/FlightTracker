@@ -13,7 +13,7 @@
 
 
 Route::get('/test', function () {
-
+    dd(\App\General::getAirportName(1));
 });
 
 
@@ -31,11 +31,6 @@ Route::get('/login',function (){
 
 Route::post('/login', 'AuthController@postLoginPage');
 
-Route::get('/logout' , function (){
-    session()->flush();
-    Auth::logout();
-    return redirect('/login');
-});
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/simpleView',function (){
@@ -47,3 +42,14 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 
+Route::get('/logout' , function (){
+    session()->flush();
+    Auth::logout();
+    return redirect('/login');
+});
+
+Route::get('cleanCache', function (Request $request){
+    Cache::flush();
+    Artisan::call('cache:clear');
+    dd('All Caches was deleted');
+});

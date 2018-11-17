@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Flight extends Model
 {
     protected $table = 'flights';
+    protected $appends = ['airlineName','sourceAirportName','destinationAirportName','airPlaneName'];
+
 
     public function flightLogs(){
         return $this->hasMany(\App\FlightLog::class,'flightId','id');
@@ -30,5 +32,23 @@ class Flight extends Model
 
     public function destAirPort(){
         return $this->hasOne(\App\AirPort::class,'id','destinationAirportId');
+    }
+
+    //accessors
+
+    public function getAirlineNameAttribute(){
+        return General::getAirlineName($this->airlineId);
+    }
+
+    public function getSourceAirportNameAttribute(){
+        return General::getAirportName($this->sourceAirportId);
+    }
+
+    public function getDestinationAirportNameAttribute(){
+        return General::getAirportName($this->destinationAirportId);
+    }
+
+    public function getAirplaneNameAttribute(){
+        return General::getAirplaneName($this->airPlaneId);
     }
 }
