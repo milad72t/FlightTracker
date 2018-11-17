@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
+
+    <!-- CDN added (for modal) -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
@@ -10,7 +18,7 @@
     <title>سامانه مشاهده بلادرنگ پروازها</title>
 
     <!-- Bootstrap -->
-    <link href="/vendors/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    {{--<link href="/vendors/bootstrap/dist/css/bootstrap.css" rel="stylesheet">--}}
     <!-- Font Awesome -->
     <link href="/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
@@ -25,7 +33,7 @@
     <!-- Custom Theme Style -->
     <link href="/build/css/custom.css" rel="stylesheet">
     <link rel="icon" href="/images/SepahLogo-min.png">
-
+    <link href="/css/left-side-modal.css" rel="stylesheet">
 </head>
 
 <body class="nav-md">
@@ -133,7 +141,6 @@
 
         <!-- page content -->
         <div class="right_col" role="main">
-            {{--the div is closed in dashboard_buttom--}}
             @if(session()->has('message'))
                 <div class="row">
                     <div class="alert alert-info" style="margin-top:0;" role="alert" dir="rtl">

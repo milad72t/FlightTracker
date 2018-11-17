@@ -74,7 +74,9 @@ function removeMarkers(map) {
 }
 
 function markerOnClick(e) {
-    alert("hi. you clicked the marker at " + e.target.options.flightId);
+    jQuery.noConflict();
+    $('#leftModalBody').append('test');
+    $('#leftSieModal').modal('show');
 }
 
 function airportClick(e) {
