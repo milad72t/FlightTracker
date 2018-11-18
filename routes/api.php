@@ -23,3 +23,5 @@ Route::get('getLiveFlightsLog' , 'FlightLogController@apiGetLiveFlightsLog');
 
 Route::get('getFlightInfo/{flightId}','FlightController@apiGetFlightInfo');
 
+Route::get('getAirportInfo/{airportId}','AirportController@apiGetAirportInfo');
+

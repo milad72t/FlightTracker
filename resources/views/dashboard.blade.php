@@ -1,8 +1,5 @@
 @include('dashboard_top')
 
-<script>
-
-</script>
 
 <!-- Left Side Modal -->
 <div class="modal left fade" id="leftSieModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

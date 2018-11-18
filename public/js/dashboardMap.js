@@ -102,5 +102,26 @@ function markerOnClick(e) {
 }
 
 function airportClick(e) {
-    alert("hi. you clicked the airport at " + e.target.options.airportId);
+    jQuery.noConflict();
+    $.ajax({
+        url: '/api/getAirportInfo/' + e.target.options.airportId,
+        type: 'GET',
+        dataType: "json",
+        success: function (data) {
+            $('#myModalLabel').html('مشخصات فرودگاه');
+            var html = '<table id="datatable" class="table table-striped table-bordered"> <thead>  </thead> <tbody><tr><td>نام فرودگاه</td><td>'+data.data.name+'</td></tr><tr><td>کشور</td><td>'+data.data.country+'</td></tr><tr><td>شهر</td><td>'+data.data.city+'</td></tr><tr><td>IATA Code</td><td>'+data.data.IATA_Code+'</td></tr><tr><td >ICAO Code</td><td>'+data.data.ICAO_Code+'</td></tr><tr><td>طول جغرافیایی</td><td style="direction: ltr">'+data.data.latitude+'</td></tr><tr><td>عرض جغرافیایی</td><td style="direction: ltr">'+data.data.longitude+'</td></tr> </tbody>';
+            $('#leftModalBody').html(html);
+            $('#leftSieModal').modal('show');
+        },
+        error: function (data) {
+            swal({
+                title: 'سیستم پاسخ نمی دهد!',
+                type: 'error',
+                background: '#fff url(//bit.ly/1Nqn9HU)',
+                confirmButtonText: 'بستن'
+            });
+        },
+        complete: function () {
+        }
+    });
 }
