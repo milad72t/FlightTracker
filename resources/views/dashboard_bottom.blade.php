@@ -49,6 +49,8 @@
 
 <!-- DateJS -->
 <script src="/vendors/DateJS/build/date.js"></script>
+<!-- SweetAlert -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
 <!-- Custom Theme Scripts -->

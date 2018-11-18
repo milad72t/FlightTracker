@@ -91,9 +91,9 @@ function markerOnClick(e) {
         error: function (data) {
             swal({
                 title: 'سیستم پاسخ نمی دهد!',
-                type: 'error',
+                icon: 'error',
                 background: '#fff url(//bit.ly/1Nqn9HU)',
-                confirmButtonText: 'بستن'
+                button: 'بستن'
             });
         },
         complete: function () {
@@ -116,9 +116,9 @@ function airportClick(e) {
         error: function (data) {
             swal({
                 title: 'سیستم پاسخ نمی دهد!',
-                type: 'error',
+                icon: 'error',
                 background: '#fff url(//bit.ly/1Nqn9HU)',
-                confirmButtonText: 'بستن'
+                button: 'بستن'
             });
         },
         complete: function () {
