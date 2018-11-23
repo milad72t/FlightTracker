@@ -10,6 +10,18 @@ class Flight extends Model
     protected $appends = ['airlineName','sourceAirportName','destinationAirportName','airPlaneName'];
 
 
+    public function set($flightNumber,$airlineId,$airplaneId,$sourceAirportId,$destinationAirportId,$departureTime,$arrivalTime,$finished){
+        $this->flightNumber = $flightNumber;
+        $this->airlineId = $airlineId;
+        $this->airPlaneId = $airplaneId;
+        $this->sourceAirportId = $sourceAirportId;
+        $this->destinationAirportId = $destinationAirportId;
+        $this->departureTime = $departureTime;
+        $this->arrivalTime = $arrivalTime;
+        $this->finished = $finished;
+        return $this->save();
+    }
+
     public function flightLogs(){
         return $this->hasMany(\App\FlightLog::class,'flightId','id');
     }

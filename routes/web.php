@@ -13,9 +13,8 @@
 
 
 Route::get('/test', function () {
-    dd(\App\General::getAirportName(1));
+    dd(\App\General::getAllActiveAirports());
 });
-
 
 
 Route::get('/', function () {
@@ -39,6 +38,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/dashboard',function (){
         return view('dashboard');
     });
+    Route::get('/setNewFlight','ViewController@getNewFlightPage');
+    Route::post('/setNewFlight','ViewController@postNewFlightPage');
 });
 
 

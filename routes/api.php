@@ -25,3 +25,5 @@ Route::get('getFlightInfo/{flightId}','FlightController@apiGetFlightInfo');
 
 Route::get('getAirportInfo/{airportId}','AirportController@apiGetAirportInfo');
 
+Route::post('setNewFlight','FlightController@apiSetNewFlight');
+

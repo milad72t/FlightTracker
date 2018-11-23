@@ -64,8 +64,8 @@
                                 <li><a href="/dashboard"><i class="fa fa-globe"></i> نقشه<span class="fa fa-chevron-left"></span></a></li>
                                 <li><a><i class="fa fa-plane"></i> مدیریت پروازها <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                            <li><a href="#">مشاهده پروازها</a></li>
-                                            <li><a href="#">اضافه کردن پرواز</a></li>
+                                            <li><a href="/setNewFlight">اضافه کردن پرواز</a></li>
+                                            <li><a href="#">خاتمه اعلام کردن پرواز</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-location-arrow"></i> مدیریت فرودگاه ها <span class="fa fa-chevron-down"></span></a>
@@ -79,6 +79,13 @@
                                         <li><a href="#">مشاهده گزارشات</a></li>
                                     </ul>
                                 </li>
+                            <li><a><i class="fa fa-users"></i> مدیریت کاربران <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="#">مشاهده کاربران</a></li>
+                                    <li><a href="#">اضافه کردن کاربر</a></li>
+                                    <li><a href="#">مشاهده مراجعات</a></li>
+                                </ul>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -141,10 +148,11 @@
 
         <!-- page content -->
         <div class="right_col" role="main">
-            @if(session()->has('message'))
+            @if(session()->has('notification'))
                 <div class="row">
                     <div class="alert alert-info" style="margin-top:0;" role="alert" dir="rtl">
                         <button type="button" class="close" data-dismiss="alert" style="float: left">×</button>
+                        {{session()->get('notification')}}
                     </div>
                 </div>
             @endif
