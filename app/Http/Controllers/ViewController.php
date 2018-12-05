@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\General;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Route;
 
 class ViewController extends Controller
@@ -36,11 +37,24 @@ class ViewController extends Controller
         $user = Auth::user();
         $request = Request::create('/api/changePassword/'.$user->id , 'POST');
         $response = Route::dispatch($request)->getData();
-        if($response->status == 200) {
+        if($response->status == 200)
             return redirect()->intended('/dashboard')->with('notification', $response->msg);
-        }
-        else{
+        else
             return redirect()->back()->withInput()->withErrors($response->msg);
-        }
+    }
+
+    public function getSearchFlight(){
+        return view ('search_flight');
+    }
+
+    public function postSearchFlight(){
+        $flightId = Input::get('flightId');
+        $request = Request::create('/api/getAllFlightInfo/'.$flightId,'GET');
+        $response = Route::dispatch($request)->getData();
+        if($response->data)
+            return view('flight_info')->with('flightInfo',$response->data);
+        else
+            return redirect()->back()->withInput()->with('message','پروازی با این شناسه یافت نشد');
+
     }
 }

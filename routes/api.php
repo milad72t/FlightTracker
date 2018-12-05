@@ -23,6 +23,8 @@ Route::get('getLiveFlightsLog' , 'FlightLogController@apiGetLiveFlightsLog');
 
 Route::get('getFlightInfo/{flightId}','FlightController@apiGetFlightInfo');
 
+Route::get('getAllFlightInfo/{flightId}','FlightController@apiGetAllFlightInfo');
+
 Route::get('getAirportInfo/{airportId}','AirportController@apiGetAirportInfo');
 
 Route::post('setNewFlight','FlightController@apiSetNewFlight');

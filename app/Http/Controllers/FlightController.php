@@ -17,6 +17,14 @@ class FlightController extends Controller
         ]);
     }
 
+    public function apiGetAllFlightInfo($flightId){
+        $flight = Flight::with(['lastFlightLog','airline','airplane','sourceAirport','destAirPort'])->find($flightId);
+        return response()->json([
+            'status' => 200,
+            'data' => $flight
+        ]);
+    }
+
     public function apiSetNewFlight(Request $request){
         $validator = Validator::make($request->all(), [
             'flightNumber'=> 'required | string | max:10',

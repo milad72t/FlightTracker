@@ -65,7 +65,7 @@
                                 <li><a><i class="fa fa-plane"></i> مدیریت پروازها <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                             <li><a href="/setNewFlight">اضافه کردن پرواز</a></li>
-                                            <li><a href="#">خاتمه اعلام کردن پرواز</a></li>
+                                            <li><a href="/searchFlight">جستجوی پرواز</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-location-arrow"></i> مدیریت فرودگاه ها <span class="fa fa-chevron-down"></span></a>
