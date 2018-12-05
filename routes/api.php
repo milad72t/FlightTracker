@@ -27,3 +27,5 @@ Route::get('getAirportInfo/{airportId}','AirportController@apiGetAirportInfo');
 
 Route::post('setNewFlight','FlightController@apiSetNewFlight');
 
+Route::post('changePassword/{user_id}','UserController@apiChangePassword');
+

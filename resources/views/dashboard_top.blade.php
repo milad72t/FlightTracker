@@ -150,7 +150,7 @@
         <div class="right_col" role="main">
             @if(session()->has('notification'))
                 <div class="row">
-                    <div class="alert alert-info" style="margin-top:0;" role="alert" dir="rtl">
+                    <div class="alert alert-info" style="color: #0000F0; margin-top:0;" role="alert" dir="rtl">
                         <button type="button" class="close" data-dismiss="alert" style="float: left">×</button>
                         {{session()->get('notification')}}
                     </div>

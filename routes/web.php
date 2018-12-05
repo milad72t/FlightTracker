@@ -40,6 +40,8 @@ Route::group(['middleware' => ['auth']], function () {
     });
     Route::get('/setNewFlight','ViewController@getNewFlightPage');
     Route::post('/setNewFlight','ViewController@postNewFlightPage');
+    Route::get('/dashboard/changePassword','ViewController@getChangePassword');
+    Route::post('/dashboard/changePassword','ViewController@postChangePassword');
 });
 
 
