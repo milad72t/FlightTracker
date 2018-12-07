@@ -8,6 +8,7 @@ class Flight extends Model
 {
     protected $table = 'flights';
     protected $appends = ['airlineName','sourceAirportName','destinationAirportName','airPlaneName'];
+    protected $hidden =['flightLogs'];
 
 
     public function set($flightNumber,$airlineId,$airplaneId,$sourceAirportId,$destinationAirportId,$departureTime,$arrivalTime,$finished){
@@ -44,6 +45,28 @@ class Flight extends Model
 
     public function destAirPort(){
         return $this->hasOne(\App\AirPort::class,'id','destinationAirportId');
+    }
+
+    public function layerFlightLatLng(){
+        try {
+            $flightLogs = $this->flightLogs->toArray();
+            $flightLogsCount = count($flightLogs);
+            $recordNumber = 100;
+            $response = [];
+            if ($flightLogsCount <= $recordNumber) {
+                foreach ($flightLogs as $flightLog)
+                    array_push($response, [(double)$flightLog['latitude'], (double)$flightLog['longitude']]);
+            } else {
+                for ($i = 1; $i < $recordNumber; $i++) {
+                    $key = floor($flightLogsCount / $recordNumber) * $i;
+                    $flightLog = $flightLogs[$key];
+                    array_push($response, [(double)$flightLog['latitude'], (double)$flightLog['longitude']]);
+                }
+            }
+            return $response;
+        }catch (\Exception $e){
+            return [];
+        }
     }
 
     //accessors

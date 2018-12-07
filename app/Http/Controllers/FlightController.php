@@ -19,6 +19,8 @@ class FlightController extends Controller
 
     public function apiGetAllFlightInfo($flightId){
         $flight = Flight::with(['lastFlightLog','airline','airplane','sourceAirport','destAirPort'])->find($flightId);
+        if($flight)
+            $flight->layerFlightLatLng = $flight->layerFlightLatLng();
         return response()->json([
             'status' => 200,
             'data' => $flight

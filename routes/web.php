@@ -13,6 +13,8 @@
 
 
 Route::get('/test', function () {
+    $flight = \App\Flight::find(1);
+    dd($flight->layerFlightLatLng());
     dd(\App\General::getAllActiveAirports());
 });
 

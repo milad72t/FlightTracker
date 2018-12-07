@@ -1,21 +1,40 @@
 @include('dashboard_top')
 <script>
     $(document).ready(function(){
+        @if($flightInfo->last_flight_log)
         var mapOptions = {
-            center: [16.506174, 80.648015],
-            zoom: 7
+            center: [@json($flightInfo->last_flight_log->latitude ), @json($flightInfo->last_flight_log->longitude)],
+            zoom: 3
         };
+        @else
+        var mapOptions = {
+                center: [16.506174, 80.648015],
+                zoom: 5
+            }
+        @endif
         var map = new L.map('map', mapOptions);
         var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
         map.addLayer(layer);
-        var latlngs = [
-            [17.385044, 78.486671],
-            [16.506174, 80.648015],
-            [17.000538, 81.804034],
-            [17.686816, 83.218482]
-        ];
+        var latlngs = @json($flightInfo->layerFlightLatLng);
         var polyline = L.polyline(latlngs, {color: 'red'});
         polyline.addTo(map);
+        @if($flightInfo->last_flight_log)
+            var flightIcon = {
+                    iconUrl: '/images/f-icon.png',
+                    iconSize: [50, 50]
+                };
+            var customFlightIcon = L.icon(flightIcon);
+            var marker = new L.Marker([@json($flightInfo->last_flight_log->latitude ), @json($flightInfo->last_flight_log->longitude)],{
+                riseOnHover	: true,
+                name : 'marker',
+                rotationAngle: @json($flightInfo->last_flight_log->angle),
+                icon: customFlightIcon,
+            });
+            marker.addTo(map);
+        @endif
+        $('#changeFlightStatus').click(function () {
+            alert(@json($flightInfo->id));
+        })
     });
 
 </script>
@@ -200,6 +219,7 @@
                 </tr>
                 </tbody>
             </table>
+            <a  class="btn btn-success" id="changeFlightStatus">خاتمه اعلام کردن پرواز</a>
         </div>
     </div>
 </div>
