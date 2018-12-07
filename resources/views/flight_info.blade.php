@@ -32,8 +32,30 @@
             });
             marker.addTo(map);
         @endif
+
+
         $('#changeFlightStatus').click(function () {
-            alert(@json($flightInfo->id));
+            jQuery.noConflict();
+            $.ajax({
+                url: '/api/setFlightFinished/' + @json($flightInfo->id),
+                type: 'GET',
+                dataType: "json",
+                success: function (data) {
+                    $('#flightStatus').text('پایان یافته');
+                    $('#flightStatus').css("background-color", "#ff4d4d");
+                    swal("اتمام پرواز مورد نظر در سامانه به ثبت رسید", "", "success");
+                },
+                error: function (data) {
+                    swal({
+                        title: 'سیستم پاسخ نمی دهد!',
+                        icon: 'error',
+                        background: '#fff url(//bit.ly/1Nqn9HU)',
+                        button: 'بستن'
+                    });
+                },
+                complete: function () {
+                }
+            });
         })
     });
 
@@ -67,11 +89,11 @@
                         <td>{{$flightInfo->id}}</td>
                         <td >{{$flightInfo->flightNumber}}</td>
                         <td >{{$flightInfo->departureTime}}</td>
-                        <td >{{$flightInfo->arrivalTime}}</td>
+                        <td>{{$flightInfo->arrivalTime}}</td>
                         @if($flightInfo->finished)
-                            <td style="background-color: #ff4d4d; color: #ffffff;">پایان یافته</td>
+                            <td id="flightStatus" style="background-color: #ff4d4d; color: #ffffff;">پایان یافته</td>
                         @else
-                            <td style="background-color: #00b300; color: #ffffff;">در حال پرواز</td>
+                            <td id="flightStatus" style="background-color: #00b300; color: #ffffff;">در حال پرواز</td>
                         @endif
                     </tr>
                 </tbody>
@@ -219,7 +241,9 @@
                 </tr>
                 </tbody>
             </table>
-            <a  class="btn btn-success" id="changeFlightStatus">خاتمه اعلام کردن پرواز</a>
+            @if(!$flightInfo->finished)
+                <a  class="btn btn-success" id="changeFlightStatus">خاتمه اعلام کردن پرواز</a>
+            @endif
         </div>
     </div>
 </div>
