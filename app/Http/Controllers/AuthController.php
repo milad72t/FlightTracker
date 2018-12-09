@@ -32,6 +32,7 @@ class AuthController extends Controller
             $user = User::where(['username' => $data['username']])->first();
             if ($user && (Hash::check($data['password'] , $user->password))){
                 $user->lastLogin = Carbon::now()->toDateTimeString();
+                $user->save();
                 return response()->json([
                     'status' => 200,
                     "id" => $user->id,

@@ -13,6 +13,7 @@
 
 
 Route::get('/test', function () {
+    dd(\App\General::getShamsiDate(\Carbon\Carbon::now()));
     $flight = \App\Flight::find(1);
     dd($flight->layerFlightLatLng());
     dd(\App\General::getAllActiveAirports());
@@ -46,6 +47,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/dashboard/changePassword','ViewController@postChangePassword');
     Route::get('/searchFlight','ViewController@getSearchFlight');
     Route::post('/searchFlight','ViewController@postSearchFlight');
+    Route::get('/users/create','ViewController@getCreateUser');
+    Route::post('/users/create','ViewController@postCreateUser');
+    Route::get('/users/show','ViewController@getUsersShow');
 
 });
 

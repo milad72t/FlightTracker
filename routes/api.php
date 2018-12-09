@@ -33,3 +33,7 @@ Route::post('changePassword/{user_id}','UserController@apiChangePassword');
 
 Route::get('setFlightFinished/{flight_id}','FlightController@apiSetFlightFinished');
 
+Route::post('addUser','UserController@apiAddUser');
+
+Route::get('getAllUsers','UserController@apiGetAllUsers');
+

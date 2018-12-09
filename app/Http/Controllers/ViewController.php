@@ -57,4 +57,26 @@ class ViewController extends Controller
             return redirect()->back()->withInput()->with('message','پروازی با این شناسه یافت نشد');
 
     }
+
+    public function getCreateUser(){
+        return view('create_user');
+    }
+
+    public function postCreateUser(){
+        $request = Request::create('/api/addUser', 'POST');
+        $response = Route::dispatch($request)->getData();
+        if($response->status == 200 )
+            return redirect()->intended('/users/show')->with('notification' , $response->msg) ;
+        else
+            return redirect()->intended('/users/create')->withInput()->withErrors($response->msg);
+    }
+
+    public function getUsersShow(){
+        $request = Request::create('/api/getAllUsers', 'GET');
+        $response = Route::dispatch($request)->getData();
+        if($response->status == 200 )
+            return view('users_show')->with('users',$response->data);
+        else
+            return redirect()->intended('/dashboard')->with('notification' , $response->msg) ;
+    }
 }

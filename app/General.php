@@ -90,4 +90,18 @@ class General extends Model
             return $airPorts ;
         });
     }
+
+    public static function getShamsiDate($gregDate,$justDate = false){
+        try{
+            if($gregDate == null)
+                return null;
+            if($justDate)
+                $dateFormat = 'Y-m-d';
+            else
+                $dateFormat = 'H:i:s Y-m-d';
+            return CalendarUtils::strftime($dateFormat, strtotime($gregDate));
+        }catch (\Exception $e){
+            return $gregDate;
+        }
+    }
 }
