@@ -97,4 +97,22 @@ class ViewController extends Controller
         else
             return redirect()->intended('/dashboard')->with('notification' , $response->msg);
     }
+
+    public function getLoginLogs(){
+        $request = Request::create('/api/getLoginLogs', 'GET');
+        $response = Route::dispatch($request)->getData();
+        if($response->status == 200 ){
+            $successLogin = [];
+            $failedLogin = [];
+            foreach ($response->data as $value){
+                if($value->type == 1)
+                    array_push($successLogin,$value);
+                else
+                    array_push($failedLogin,$value);
+            }
+            return view('login_logs')->with(['successLogin'=>$successLogin,'failedLogin'=>$failedLogin]);
+        }
+        else
+            return redirect()->intended('/dashboard')->with('notification' , $response->msg);
+    }
 }

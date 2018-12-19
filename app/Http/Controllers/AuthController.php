@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\LoginLog;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,6 +34,8 @@ class AuthController extends Controller
             if ($user && (Hash::check($data['password'] , $user->password))){
                 $user->lastLogin = Carbon::now()->toDateTimeString();
                 $user->save();
+                $loginLog = new LoginLog();
+                $loginLog->set(1,$data['username'],$user->id,$request->ip(),Carbon::now());
                 return response()->json([
                     'status' => 200,
                     "id" => $user->id,
@@ -40,6 +43,8 @@ class AuthController extends Controller
                     "lastName" => $user->lastName
                 ]);
             }else{
+                $loginLog = new LoginLog();
+                $loginLog->set(2,$data['username'],null,$request->ip(),Carbon::now());
                 return response()->json([
                     'status' => 417,
                     'msg' => 'نام کاربری یا گذرواژه نادرست است'
@@ -72,5 +77,12 @@ class AuthController extends Controller
                 ]);
             }
         }
+    }
+
+    public function apiGetLoginLogs(){
+        return response()->json([
+            'status' => 200,
+            'data' => LoginLog::all()
+        ]);
     }
 }

@@ -84,7 +84,7 @@
                                 <ul class="nav child_menu">
                                     <li><a href="/users/show">مشاهده کاربران</a></li>
                                     <li><a href="/users/create">اضافه کردن کاربر</a></li>
-                                    <li><a href="#">مشاهده مراجعات</a></li>
+                                    <li><a href="/loginLogs/show">مشاهده مراجعات</a></li>
                                 </ul>
                             </li>
                             <li><a><i class="fa fa-file-text-o"></i> گزارشات <span class="fa fa-chevron-down"></span></a>
