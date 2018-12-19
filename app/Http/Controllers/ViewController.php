@@ -79,4 +79,22 @@ class ViewController extends Controller
         else
             return redirect()->intended('/dashboard')->with('notification' , $response->msg) ;
     }
+
+    public function getAirportsShow(){
+        $request = Request::create('/api/getAllAirports', 'GET');
+        $response = Route::dispatch($request)->getData();
+        if($response->status == 200 )
+            return view('airports_show')->with('airports',$response->data);
+        else
+            return redirect()->intended('/dashboard')->with('notification' , $response->msg);
+    }
+
+    public function getAirlinesShow(){
+        $request = Request::create('/api/getAllAirlines', 'GET');
+        $response = Route::dispatch($request)->getData();
+        if($response->status == 200 )
+            return view('airlines_show')->with('airlines',$response->data);
+        else
+            return redirect()->intended('/dashboard')->with('notification' , $response->msg);
+    }
 }

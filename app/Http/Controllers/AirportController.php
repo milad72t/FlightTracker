@@ -14,4 +14,11 @@ class AirportController extends Controller
             'data' => $airport
         ]);
     }
+
+    public function apiGetAllAirports(){
+        return response()->json([
+           'status' => 200,
+            'data' => AirPort::all()
+        ]);
+    }
 }

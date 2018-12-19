@@ -68,12 +68,18 @@
                                             <li><a href="/searchFlight">جستجوی پرواز</a></li>
                                     </ul>
                                 </li>
-                                <li><a><i class="fa fa-location-arrow"></i> مدیریت فرودگاه ها <span class="fa fa-chevron-down"></span></a>
+                                <li><a><i class="fa fa-road"></i> مدیریت فرودگاه ها <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="#">مشاهده فرودگاه ها</a></li>
+                                        <li><a href="/airports/show">مشاهده فرودگاه ها</a></li>
                                         <li><a href="#">اضافه کردن فرودگاه</a></li>
                                     </ul>
                                 </li>
+                            <li><a><i class="fa fa-location-arrow"></i> مدیریت ایرلاین ها <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="/airlines/show">مشاهده ایرلاین ها</a></li>
+                                    <li><a href="#">اضافه کردن ایرلاین</a></li>
+                                </ul>
+                            </li>
                             <li><a><i class="fa fa-users"></i> مدیریت کاربران <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                     <li><a href="/users/show">مشاهده کاربران</a></li>

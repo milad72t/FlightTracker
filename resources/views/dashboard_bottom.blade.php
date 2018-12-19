@@ -52,7 +52,6 @@
 <!-- SweetAlert -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-
 <!-- Custom Theme Scripts -->
 <script src="/build/js/custom.js"></script>
 <script src="/build/js/persianumber.js"></script>

@@ -19,4 +19,5 @@ class AirPort extends Model
         $this->longitude = $longitude;
         $this->save();
     }
+
 }

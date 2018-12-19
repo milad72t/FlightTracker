@@ -37,3 +37,7 @@ Route::post('addUser','UserController@apiAddUser');
 
 Route::get('getAllUsers','UserController@apiGetAllUsers');
 
+Route::get('getAllAirports','AirportController@apiGetAllAirports');
+
+Route::get('getAllAirlines','AirlinesController@apiGetAllAirlines');
+
