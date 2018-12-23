@@ -47,6 +47,11 @@
 <script src="/vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
 <script src="/vendors/flot.curvedlines/curvedLines.js"></script>
 
+<!-- Data Table -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+
 <!-- DateJS -->
 <script src="/vendors/DateJS/build/date.js"></script>
 <!-- SweetAlert -->

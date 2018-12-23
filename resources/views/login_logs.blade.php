@@ -1,5 +1,11 @@
 @include('dashboard_top')
 
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#datatable').DataTable();
+    } );
+</script>
+
 <div class="row">
     <div class="x_content">
         <div class="" role="tabpanel" data-example-id="togglable-tabs">
