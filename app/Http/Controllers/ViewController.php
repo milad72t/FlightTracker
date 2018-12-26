@@ -51,6 +51,7 @@ class ViewController extends Controller
         $flightId = Input::get('flightId');
         $request = Request::create('/api/getAllFlightInfo/'.$flightId,'GET');
         $response = Route::dispatch($request)->getData();
+//        dd($flightId);
         if($response->data)
             return view('flight_info')->with('flightInfo',$response->data);
         else

@@ -13,6 +13,9 @@
 
 
 Route::get('/test', function () {
+    $request = \Illuminate\Http\Request::create('/searchFlight','POST');
+    $request->merge(['flightId'=>11]);
+    echo \Illuminate\Support\Facades\Route::dispatch($request);
     dd(\App\General::getShamsiDate(\Carbon\Carbon::now()));
     $flight = \App\Flight::find(1);
     dd($flight->layerFlightLatLng());

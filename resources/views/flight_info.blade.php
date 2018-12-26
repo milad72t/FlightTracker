@@ -74,7 +74,7 @@
         <div class="x_content">
             <div id="map" style="position:relative ; width: 100%; height: 300px"></div>
             <h2>مشخصات پرواز</h2>
-            <table id="datatable" class="table table-striped table-bordered">
+            <table id="datatable_" class="table table-striped table-bordered">
                 <thead>
                 <tr>
                     <th>شناسه پرواز</th>
@@ -101,7 +101,7 @@
 
             @if($flightInfo->last_flight_log)
                 <h2>آخرین لاگ ارسالی</h2>
-                <table id="datatable" class="table table-striped table-bordered">
+                <table id="datatable_" class="table table-striped table-bordered">
                     <thead>
                     <tr>
                         <th>ارتفاع</th>
@@ -126,7 +126,7 @@
             @endif
 
             <h2>مشخصات ایرلاین</h2>
-            <table id="datatable" class="table table-striped table-bordered">
+            <table id="datatable_" class="table table-striped table-bordered">
                 <thead>
                 <tr>
                     <th>شناسه ایرلاین</th>
@@ -157,7 +157,7 @@
                 </tbody>
             </table>
             <h2>مشخصات هواپیما</h2>
-            <table id="datatable" class="table table-striped table-bordered">
+            <table id="datatable_" class="table table-striped table-bordered">
                 <thead>
                 <tr>
                     <th>شناسه هواپیما</th>
@@ -176,7 +176,7 @@
                 </tbody>
             </table>
             <h2>فرودگاه مبدا</h2>
-            <table id="datatable" class="table table-striped table-bordered">
+            <table id="datatable_" class="table table-striped table-bordered">
                 <thead>
                 <tr>
                     <th>شناسه فرودگاه</th>
@@ -209,7 +209,7 @@
                 </tbody>
             </table>
             <h2>فرودگاه مقصد</h2>
-            <table id="datatable" class="table table-striped table-bordered">
+            <table id="datatable_" class="table table-striped table-bordered">
                 <thead>
                 <tr>
                     <th>شناسه فرودگاه</th>

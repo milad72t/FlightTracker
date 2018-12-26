@@ -86,6 +86,10 @@ function markerOnClick(e) {
             $('#myModalLabel').html('جز‌ئیات پرواز');
             var html = '<table id="datatable" class="table table-striped table-bordered"> <thead>  </thead> <tbody><tr><td>شماره پرواز</td><td>'+data.data.flightNumber+'</td></tr><tr><td>نام ایرلاین</td><td>'+data.data.airlineName+'</td></tr><tr><td>فرودگاه مبدا</td><td>'+data.data.sourceAirportName+'</td></tr><tr><td>فرودگاه مقصد</td><td>'+data.data.destinationAirportName+'</td></tr><tr><td >زمان حرکت</td><td>'+data.data.departureTime+'</td></tr><tr><td>نام هواپیما</td><td>'+data.data.airPlaneName+'</td></tr><tr><td>سرعت</td><td>'+e.target.options.speed+'</td></tr><tr><td>ارتفاع</td><td>'+e.target.options.altitude+'</td></tr><tr><td>زاویه</td><td>'+e.target.options.angle+'</td></tr></tr><tr><td>طول جغرافیایی</td><td style="direction: ltr">'+e.latlng.lat+'</td></tr></tr><tr><td>عرض جغرافیایی</td><td style="direction: ltr">'+e.latlng.lng+'</td></tr> </tbody>';
             $('#leftModalBody').html(html);
+            var infoLink = '<form method="post" action="/searchFlight"><input type="hidden" id="flightId" name="flightId" value='+e.target.options.flightId+'> <button type="submit" id="form_submit" class="btn btn-info" style="width: 80%;">مشاهده جزئیات پرواز</button></form>';
+            $('#infoLink').html(infoLink);
+            var image = '<img align="center" style="width: 100%;margin-bottom: 0px" src="images/plane-'+data.data.airPlaneId+'.JPG">';
+            $('#image').html(image);
             $('#leftSieModal').modal('show');
         },
         error: function (data) {
@@ -111,6 +115,10 @@ function airportClick(e) {
             $('#myModalLabel').html('مشخصات فرودگاه');
             var html = '<table id="datatable" class="table table-striped table-bordered"> <thead>  </thead> <tbody><tr><td>نام فرودگاه</td><td>'+data.data.name+'</td></tr><tr><td>کشور</td><td>'+data.data.country+'</td></tr><tr><td>شهر</td><td>'+data.data.city+'</td></tr><tr><td>IATA Code</td><td>'+data.data.IATA_Code+'</td></tr><tr><td >ICAO Code</td><td>'+data.data.ICAO_Code+'</td></tr><tr><td>طول جغرافیایی</td><td style="direction: ltr">'+data.data.latitude+'</td></tr><tr><td>عرض جغرافیایی</td><td style="direction: ltr">'+data.data.longitude+'</td></tr> </tbody>';
             $('#leftModalBody').html(html);
+            var infoLink = '';
+            $('#infoLink').html(infoLink);
+            var image = '<img align="center" style="width: 100%;margin-bottom: 0px" src="images/airport.JPG">';
+            $('#image').html(image);
             $('#leftSieModal').modal('show');
         },
         error: function (data) {

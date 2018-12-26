@@ -10,8 +10,10 @@
                 <h4 class="modal-title" id="myModalLabel"></h4>
             </div>
             <div class="modal-body">
+                <div id="image"></div>
                 <p id="leftModalBody">
                 </p>
+                <div id="infoLink" align="center" ></div>
             </div>
         </div><!-- modal-content -->
     </div><!-- modal-dialog -->
