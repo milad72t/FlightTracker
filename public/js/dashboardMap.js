@@ -1,9 +1,18 @@
 $(document).ready(function(){
     var mapOptions = {
         center: [19.093266636089712, -102.249755859375],
-        zoom: 7
+        zoom: 7,
     };
     var map = new L.map('map', mapOptions);
+    var options = {
+        primaryLengthUnit : 'kilometers',
+        secondaryLengthUnit : undefined,
+        primaryAreaUnit : 'sqmeters',
+        completedColor : '#e80b25',
+        activeColor : '#04e508'
+    };
+    var measureControl = new L.Control.Measure(options);
+    measureControl.addTo(map);
     var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
     map.addLayer(layer);
     var scale = L.control.scale();
@@ -14,7 +23,7 @@ $(document).ready(function(){
         fetchData(map);
     });
     map.on('click', function(e) {
-        console.log(e,map.getBounds());
+        removeMarkers(map);
     });
 });
 
