@@ -86,9 +86,9 @@
                                     <li><a href="/loginLogs/show">مشاهده مراجعات</a></li>
                                 </ul>
                             </li>
-                            <li><a><i class="fa fa-file-text-o"></i> گزارشات <span class="fa fa-chevron-down"></span></a>
+                            <li><a><i class="fa fa-file-text-o"></i> سایر <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
-                                    <li><a href="#">مشاهده گزارشات</a></li>
+                                    <li><a href="/settings/show">تنظیمات</a></li>
                                 </ul>
                             </li>
                         </ul>

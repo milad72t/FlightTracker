@@ -51,7 +51,6 @@ class ViewController extends Controller
         $flightId = Input::get('flightId');
         $request = Request::create('/api/getAllFlightInfo/'.$flightId,'GET');
         $response = Route::dispatch($request)->getData();
-//        dd($flightId);
         if($response->data)
             return view('flight_info')->with('flightInfo',$response->data);
         else
@@ -115,5 +114,20 @@ class ViewController extends Controller
         }
         else
             return redirect()->intended('/dashboard')->with('notification' , $response->msg);
+    }
+
+    public function getSettingShow(){
+        $request = Request::create('/api/getAllSettings', 'GET');
+        $response = Route::dispatch($request)->getData();
+        if($response->status == 200 )
+            return view('settings_show')->with('settings',$response->data);
+        else
+            return redirect()->intended('/dashboard')->with('notification' , $response->msg);
+    }
+
+    public function postSettingShow(){
+        $request = Request::create('/api/updateSettings', 'post');
+        $response = Route::dispatch($request)->getData();
+        return redirect()->intended('/settings/show')->with('notification' , $response->msg);
     }
 }

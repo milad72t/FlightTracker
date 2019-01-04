@@ -32,31 +32,6 @@
             });
             marker.addTo(map);
         @endif
-
-
-        $('#changeFlightStatus').click(function () {
-            jQuery.noConflict();
-            $.ajax({
-                url: '/api/setFlightFinished/' + @json($flightInfo->id),
-                type: 'GET',
-                dataType: "json",
-                success: function (data) {
-                    $('#flightStatus').text('پایان یافته');
-                    $('#flightStatus').css("background-color", "#ff4d4d");
-                    swal("اتمام پرواز مورد نظر در سامانه به ثبت رسید", "", "success");
-                },
-                error: function (data) {
-                    swal({
-                        title: 'سیستم پاسخ نمی دهد!',
-                        icon: 'error',
-                        background: '#fff url(//bit.ly/1Nqn9HU)',
-                        button: 'بستن'
-                    });
-                },
-                complete: function () {
-                }
-            });
-        })
     });
 
 </script>
@@ -241,9 +216,6 @@
                 </tr>
                 </tbody>
             </table>
-            @if(!$flightInfo->finished)
-                <a  class="btn btn-success" id="changeFlightStatus">خاتمه اعلام کردن پرواز</a>
-            @endif
         </div>
     </div>
 </div>

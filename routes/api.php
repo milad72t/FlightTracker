@@ -43,3 +43,9 @@ Route::get('getAllAirlines','AirlinesController@apiGetAllAirlines');
 
 Route::get('getLoginLogs','AuthController@apiGetLoginLogs');
 
+Route::get('getAllSettings','SettingController@apiGetAllSettings');
+
+Route::post('updateSettings','SettingController@apiUpdateSettings');
+
+
+
