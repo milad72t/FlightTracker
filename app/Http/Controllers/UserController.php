@@ -55,6 +55,7 @@ class UserController extends Controller
                 "password" => "required | min:6 | max:12",
                 "rePassword" => "required | same:password",
                 "UserStatus" => "required | between:1,2 ",
+                "FormIds" => "required | array | exists:form:id",
             ],
             [
                 "required" => "لطفا تمامی فیلدهای مورد نظر را پر کنید",
@@ -67,11 +68,13 @@ class UserController extends Controller
                 "same" => "رمز عبور با تکرار رمز عبور مطابقت ندارد",
                 "FirstName.string" => "مقدار فیلد نام به درستی وارد نشده است",
                 "LastName.string" => "مقدار فیلد نام خانوادگی به درستی وارد نشده است",
+                "FormIds.required" => "لطفا فرم های مجاز دسترسی کاربر را وارد نمایید",
             ]);
         if($validator->passes()){
             $user = new User();
             $user->set($request->get('FirstName'),$request->get('LastName'),$request->get('UserName'),
                 $request->get('password'),$request->get('UserStatus'));
+            $user->permittedForms()->attach($request->get('FormIds'));
             return response()->json([
                 'status' => 200,
                 'msg' => 'ساخت کاربر جدید با موفقیت انجام شد'

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Form;
 use App\General;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -59,7 +60,8 @@ class ViewController extends Controller
     }
 
     public function getCreateUser(){
-        return view('create_user');
+        $forms = Form::all();
+        return view('create_user')->with('forms',$forms);
     }
 
     public function postCreateUser(){

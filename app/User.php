@@ -55,4 +55,12 @@ class User extends Authenticatable
     public function getCreatedAtShAttribute(){
         return General::getShamsiDate($this->created_at);
     }
+
+    public function permittedForms(){
+        return $this->belongsToMany(Form::class,'user_form_access');
+    }
+
+    public function permittedFormsName(){
+        return array_column($this->permittedForms->toArray(),'name');
+    }
 }

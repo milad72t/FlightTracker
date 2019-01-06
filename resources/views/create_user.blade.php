@@ -75,6 +75,17 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="control-label col-md-2 col-sm-2 col-xs-2" for="roles"> فرم های مجاز دسترسی</label>
+                        <div class="col-md-3 col-sm-3 col-xs-12" style="height:100px; overflow-y: scroll; border:1px solid #cccccc;">
+                            @foreach($forms as $form)
+                                <div class='checkbox' style='margin-top: -5px;'><label><input type='checkbox' value="{{$form->id}}" name='FormIds[]' checked ><h5 style='margin-right: 20px; margin-top:4px;'>{{$form->description}}</h5></label></div>
+                            @endforeach
+                        </div>
+                        @if($errors->has('FormIds'))
+                            <h5 style="color: red ;direction: rtl ; margin-top: 40px; margin-bottom: -3px" >{{$errors->first('FormIds')}}</h5>
+                        @endif
+                    </div>
+                    <div class="form-group">
                     <div class="form-group">
                     </div>
                     <div class="ln_solid"></div>

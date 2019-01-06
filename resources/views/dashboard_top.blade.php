@@ -1,3 +1,10 @@
+<?php
+$permittedForms = \Illuminate\Support\Facades\Cache::remember('PermForms_'.\Illuminate\Support\Facades\Auth::user()->id,60*8,function (){
+    return \Illuminate\Support\Facades\Auth::user()->permittedFormsName();
+});
+?>
+
+
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
@@ -63,32 +70,52 @@
                                 <li><a href="/dashboard"><i class="fa fa-globe"></i> نقشه<span class="fa fa-chevron-left"></span></a></li>
                                 <li><a><i class="fa fa-plane"></i> مدیریت پروازها <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
+                                        @if(in_array('addFlight',$permittedForms))
                                             <li><a href="/setNewFlight">اضافه کردن پرواز</a></li>
+                                        @endif
+                                        @if(in_array('searchFlight',$permittedForms))
                                             <li><a href="/searchFlight">جستجوی پرواز</a></li>
+                                        @endif
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-road"></i> مدیریت فرودگاه ها <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
+                                     @if(in_array('showAirports',$permittedForms))
                                         <li><a href="/airports/show">مشاهده فرودگاه ها</a></li>
+                                     @endif
+                                     @if(in_array('addAirports',$permittedForms))
                                         <li><a href="#">اضافه کردن فرودگاه</a></li>
+                                     @endif
                                     </ul>
                                 </li>
                             <li><a><i class="fa fa-location-arrow"></i> مدیریت ایرلاین ها <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
+                                 @if(in_array('showAirlines',$permittedForms))
                                     <li><a href="/airlines/show">مشاهده ایرلاین ها</a></li>
+                                 @endif
+                                 @if(in_array('addAirlines',$permittedForms))
                                     <li><a href="#">اضافه کردن ایرلاین</a></li>
+                                 @endif
                                 </ul>
                             </li>
                             <li><a><i class="fa fa-users"></i> مدیریت کاربران <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
+                                 @if(in_array('showUsers',$permittedForms))
                                     <li><a href="/users/show">مشاهده کاربران</a></li>
+                                 @endif
+                                  @if(in_array('addUser',$permittedForms))
                                     <li><a href="/users/create">اضافه کردن کاربر</a></li>
+                                  @endif
+                                  @if(in_array('loginLogs',$permittedForms))
                                     <li><a href="/loginLogs/show">مشاهده مراجعات</a></li>
+                                  @endif
                                 </ul>
                             </li>
                             <li><a><i class="fa fa-file-text-o"></i> سایر <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
+                                @if(in_array('settings',$permittedForms))
                                     <li><a href="/settings/show">تنظیمات</a></li>
+                                @endif
                                 </ul>
                             </li>
                         </ul>
