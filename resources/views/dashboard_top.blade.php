@@ -84,7 +84,7 @@ $permittedForms = \Illuminate\Support\Facades\Cache::remember('PermForms_'.\Illu
                                         <li><a href="/airports/show">مشاهده فرودگاه ها</a></li>
                                      @endif
                                      @if(in_array('addAirports',$permittedForms))
-                                        <li><a href="#">اضافه کردن فرودگاه</a></li>
+                                        <li><a href="/airports/add">اضافه کردن فرودگاه</a></li>
                                      @endif
                                     </ul>
                                 </li>
@@ -94,7 +94,7 @@ $permittedForms = \Illuminate\Support\Facades\Cache::remember('PermForms_'.\Illu
                                     <li><a href="/airlines/show">مشاهده ایرلاین ها</a></li>
                                  @endif
                                  @if(in_array('addAirlines',$permittedForms))
-                                    <li><a href="#">اضافه کردن ایرلاین</a></li>
+                                    <li><a href="/airlines/add">اضافه کردن ایرلاین</a></li>
                                  @endif
                                 </ul>
                             </li>

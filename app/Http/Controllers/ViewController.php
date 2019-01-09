@@ -132,4 +132,30 @@ class ViewController extends Controller
         $response = Route::dispatch($request)->getData();
         return redirect()->intended('/settings/show')->with('notification' , $response->msg);
     }
+
+    public function getAddAirline(){
+        return view('create_airline');
+    }
+
+    public function PostAddAirline(){
+        $request = Request::create('/api/addAirline', 'POST');
+        $response = Route::dispatch($request)->getData();
+        if($response->status == 200 )
+            return redirect()->intended('/airlines/show')->with('notification' , $response->msg) ;
+        else
+            return redirect()->intended('/airlines/add')->withInput()->withErrors($response->msg);
+    }
+
+    public function getAirportAdd(){
+        return view('create_airport');
+    }
+
+    public function postAirportAdd(){
+        $request = Request::create('/api/addAirport', 'POST');
+        $response = Route::dispatch($request)->getData();
+        if($response->status == 200 )
+            return redirect()->intended('/airports/show')->with('notification' , $response->msg) ;
+        else
+            return redirect()->intended('/airports/add')->withInput()->withErrors($response->msg);
+    }
 }

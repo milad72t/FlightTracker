@@ -14,7 +14,7 @@ class FlightController extends Controller
         return response()->json([
            'status' => 200,
             'data' => $flight
-        ],200);
+        ]);
     }
 
     public function apiGetAllFlightInfo($flightId){
@@ -24,7 +24,7 @@ class FlightController extends Controller
         return response()->json([
             'status' => 200,
             'data' => $flight
-        ],200);
+        ]);
     }
 
     public function apiSetNewFlight(Request $request){
@@ -44,12 +44,12 @@ class FlightController extends Controller
             return response()->json([
                 'status' => 200,
                 'msg' => str_replace('FlightId',$flight->id,'پرواز شما با شماره شناسه FlightId در سامانه به ثبت رسید')
-            ],200);
+            ]);
         }else{
             return response()->json([
                 'status' => 400,
                 'msg' => $validator->messages()
-            ],400);
+            ]);
         }
     }
 
@@ -61,12 +61,12 @@ class FlightController extends Controller
             return response()->json([
                 'status' => 200,
                 'msg' => 'اتمام پرواز مورد نظر در سامانه به ثبت رسید'
-            ],200);
+            ]);
         }else{
             return response()->json([
                 'status' => 417,
                 'msg' => 'پروازی با این شناسه در سامانه موجود نیست :('
-            ],417);
+            ]);
         }
     }
 }

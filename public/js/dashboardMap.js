@@ -23,7 +23,7 @@ $(document).ready(function(){
         fetchData(map);
     });
     map.on('click', function(e) {
-        removeMarkers(map);
+        console.log(e.latlng);
     });
 });
 

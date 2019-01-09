@@ -47,5 +47,9 @@ Route::get('getAllSettings','SettingController@apiGetAllSettings');
 
 Route::post('updateSettings','SettingController@apiUpdateSettings');
 
+Route::post('addAirline','AirlinesController@apiAddAirline');
+
+Route::post('addAirport','AirportController@apiAddAirport');
+
 
 

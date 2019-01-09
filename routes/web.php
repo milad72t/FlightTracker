@@ -59,6 +59,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/loginLogs/show','ViewController@getLoginLogs');
     Route::get('/settings/show','ViewController@getSettingShow');
     Route::post('/settings/show','ViewController@postSettingShow');
+    Route::get('/airlines/add','ViewController@getAddAirline');
+    Route::post('/airlines/add','ViewController@PostAddAirline');
+    Route::get('/airports/add','ViewController@getAirportAdd');
+    Route::post('/airports/add','ViewController@postAirportAdd');
 
 
 });
