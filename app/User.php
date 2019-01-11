@@ -39,6 +39,20 @@ class User extends Authenticatable
         return $this->save();
     }
 
+    public function pins(){
+        return $this->hasMany(UserPin::class);
+    }
+
+
+    public function permittedForms(){
+        return $this->belongsToMany(Form::class,'user_form_access');
+    }
+
+    public function permittedFormsName(){
+        return array_column($this->permittedForms->toArray(),'name');
+    }
+
+    //accessors
     public function getUserStatusAttribute(){
         if($this->status ==1)
             return 'فعال';
@@ -54,13 +68,5 @@ class User extends Authenticatable
 
     public function getCreatedAtShAttribute(){
         return General::getShamsiDate($this->created_at);
-    }
-
-    public function permittedForms(){
-        return $this->belongsToMany(Form::class,'user_form_access');
-    }
-
-    public function permittedFormsName(){
-        return array_column($this->permittedForms->toArray(),'name');
     }
 }

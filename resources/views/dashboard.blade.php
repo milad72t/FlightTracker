@@ -21,6 +21,6 @@
 
 <div id="map" style="position:relative ; width: 100%; height: 580px"></div>
 
-
+<script>var userId = <?php echo \Illuminate\Support\Facades\Auth::user()->id ?></script>
 <script type="text/javascript" src="/js/dashboardMap.js"></script>
 @include('dashboard_bottom')

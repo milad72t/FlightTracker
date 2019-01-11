@@ -23,7 +23,7 @@ $(document).ready(function(){
         fetchData(map);
     });
     map.on('click', function(e) {
-        console.log(e.latlng);
+        addPin(e.latlng.lat,e.latlng.lng,map);
     });
 });
 
@@ -36,7 +36,7 @@ function fetchData(map) {
 function addMarker(map) {
     var ajaxTime= new Date().getTime();
     $.get('/api/getLiveFlightsLog?east='+map.getBounds().getEast()+'&west='+map.getBounds().getWest()
-        +'&north='+map.getBounds().getNorth()+'&south='+map.getBounds().getSouth(),
+        +'&north='+map.getBounds().getNorth()+'&south='+map.getBounds().getSouth()+'&id='+userId,
         function(data,status){
             removeMarkers(map);
             console.log(new Date().getTime()-ajaxTime);
@@ -74,6 +74,20 @@ function addMarker(map) {
                 }).on('click',airportClick);
                 marker.addTo(map);
             });
+            $.each(data.userPins,function (index,element){
+                var pinIcon = {
+                    iconUrl: '/images/type-'+element.type+'.png',
+                    iconSize: [40, 35]
+                };
+                var customPinIcon = L.icon(pinIcon);
+                var marker = new L.Marker([element.latitude, element.longitude],{
+                    title: element.name,
+                    name : 'marker',
+                    icon: customPinIcon,
+                    pinId : element.id
+                }).on('click',deletePin);
+                marker.addTo(map);
+            })
         });
 }
 
@@ -141,4 +155,48 @@ function airportClick(e) {
         complete: function () {
         }
     });
+}
+
+
+function addPin(lat,lng,map){
+    swal("لطفا نامی برای مکان خود انتخاب کنید:", {
+        content: "input",
+    }).then((value) => {
+        if (!value) return null;
+    $.ajax({
+            url: '/api/addPin',
+            dataType: 'json',
+            type: 'post',
+            contentType: 'application/json',
+            data : JSON.stringify({'userId':userId,'name':value,'type':1,'latitude':lat,'longitude':lng}),
+            success : function(response){
+                console.log(response);
+                if(response.status == 200 ){
+                    swal("انجام شد!", "اضافه کردن مکان شما با موفقیت انجام شد", "success");
+                    fetchData(map);
+                }else{
+                    swal({
+                        title: 'در اضافه کردن مکان شما مشکلی پیش آمده است',
+                        icon: 'error',
+                        background: '#fff url(//bit.ly/1Nqn9HU)',
+                        button: 'بستن'
+                    });
+                }
+            },
+            error: function (response) {
+                console.log(response);
+                swal({
+                    title: 'متاسفانه اضافه کردن مکان شما در حال حاضر میسر نیست',
+                    icon: 'error',
+                    background: '#fff url(//bit.ly/1Nqn9HU)',
+                    button: 'بستن'
+                });
+            }
+
+        });
+    });
+}
+
+function deletePin() {
+
 }

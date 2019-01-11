@@ -51,5 +51,9 @@ Route::post('addAirline','AirlinesController@apiAddAirline');
 
 Route::post('addAirport','AirportController@apiAddAirport');
 
+Route::post('addPin','SettingController@apiAddPin');
+
+
+
 
 

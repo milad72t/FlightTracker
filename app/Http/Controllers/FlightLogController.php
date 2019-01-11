@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\AirPort;
 use App\Flight;
+use App\UserPin;
 use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\Cache;
@@ -32,6 +33,12 @@ class FlightLogController extends Controller
         return false;
     }
 
+    public function getUserPins($userId){
+        return Cache::remember('UserPins_'.$userId,24*60,function ()use($userId){
+           return UserPin::where('user_id',$userId)->get()->toArray();
+        });
+    }
+
     public function apiGetLiveFlightsLog(Request $request){
         $flightLogs = Flight::with('lastFlightLog')->
             where('finished',false)->select('id','flightNumber','airlineId'
@@ -55,7 +62,8 @@ class FlightLogController extends Controller
         return response()->json([
             'status' => 200,
             'flights' => $response,
-            'airports' => $this->getActiveAirportsInfo($request)
+            'airports' => $this->getActiveAirportsInfo($request),
+            'userPins' => $this->getUserPins($request->input('id'))
         ]);
 
     }

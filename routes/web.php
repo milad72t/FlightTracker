@@ -13,6 +13,7 @@
 
 
 Route::get('/test', function () {
+    dd(\App\UserPin::where('user_id',2)->get()->toArray());
     dd(\Illuminate\Support\Facades\Auth::user()->permittedFormsName());
     $request = \Illuminate\Http\Request::create('/searchFlight','POST');
     $request->merge(['flightId'=>11]);
