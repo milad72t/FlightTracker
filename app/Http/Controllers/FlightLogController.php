@@ -62,7 +62,7 @@ class FlightLogController extends Controller
         return response()->json([
             'status' => 200,
             'flights' => $response,
-            'airports' => $this->getActiveAirportsInfo($request),
+            'airports' => $request->input('getAirports') == 1 ? $this->getActiveAirportsInfo($request) : [],
             'userPins' => $this->getUserPins($request->input('id'))
         ]);
 

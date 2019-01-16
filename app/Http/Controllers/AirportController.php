@@ -20,7 +20,14 @@ class AirportController extends Controller
     public function apiGetAllAirports(){
         return response()->json([
            'status' => 200,
-            'data' => AirPort::all()
+            'data' => AirPort::all()->makeHidden(['created_at','updated_at'])
+        ]);
+    }
+
+    public function apiGetAllAirportsName(){
+        return response()->json([
+           'status' => 200,
+            'data' => AirPort::select('id','name')->get()
         ]);
     }
 

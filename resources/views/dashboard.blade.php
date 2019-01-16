@@ -1,6 +1,4 @@
 @include('dashboard_top')
-
-
 <!-- Left Side Modal -->
 <div class="modal left fade" id="leftSieModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
@@ -23,4 +21,6 @@
 
 <script>var userId = <?php echo \Illuminate\Support\Facades\Auth::user()->id ?></script>
 <script type="text/javascript" src="/js/dashboardMap.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/mousePosition.css">
+
 @include('dashboard_bottom')

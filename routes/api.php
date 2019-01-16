@@ -39,6 +39,8 @@ Route::get('getAllUsers','UserController@apiGetAllUsers');
 
 Route::get('getAllAirports','AirportController@apiGetAllAirports');
 
+Route::get('getAllAirportsName','AirportController@apiGetAllAirportsName');
+
 Route::get('getAllAirlines','AirlinesController@apiGetAllAirlines');
 
 Route::get('getLoginLogs','AuthController@apiGetLoginLogs');

@@ -31,6 +31,7 @@
                                         <th>شهر</th>
                                         <th>IATA Code</th>
                                         <th>ICAO Code</th>
+                                        <th> ارتفاع (فیت)</th>
                                         <th>وضعیت</th>
                                         <th>طول جغرافیایی</th>
                                         <th>عرض جغرافیایی</th>
@@ -45,6 +46,7 @@
                                             <td >{{$airport->city}}</td>
                                             <td >{{$airport->IATA_Code}}</td>
                                             <td >{{$airport->ICAO_Code}}</td>
+                                            <td >{{$airport->altitude}}</td>
                                             @if($airport->active)
                                                 <td style="background-color: #00b300; color: #ffffff;">فعال</td>
                                             @else

@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    $.getScript("/js/mousePosition.js", function(){
     var mapOptions = {
         center: [19.093266636089712, -102.249755859375],
         zoom: 7,
@@ -16,6 +17,9 @@ $(document).ready(function(){
     var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
     map.addLayer(layer);
     var scale = L.control.scale();
+    L.control.mousePosition({
+        prefix: 'mouse position : '
+    }).addTo(map);
     scale.addTo(map);
     fetchData(map);
     setInterval(function(){fetchData(map);},4000);
@@ -25,6 +29,8 @@ $(document).ready(function(){
     map.on('click', function(e) {
         addPin(e.latlng.lat,e.latlng.lng,map);
     });
+    });
+
 });
 
 
@@ -35,8 +41,15 @@ function fetchData(map) {
 
 function addMarker(map) {
     var ajaxTime= new Date().getTime();
+    var zoomLevel = map.getZoom();
+    var getAirport;
+    if(zoomLevel >=6)
+        getAirport = 1;
+    else
+        getAirport = 0;
+
     $.get('/api/getLiveFlightsLog?east='+map.getBounds().getEast()+'&west='+map.getBounds().getWest()
-        +'&north='+map.getBounds().getNorth()+'&south='+map.getBounds().getSouth()+'&id='+userId,
+        +'&north='+map.getBounds().getNorth()+'&south='+map.getBounds().getSouth()+'&getAirports='+getAirport+'&id='+userId,
         function(data,status){
             removeMarkers(map);
             console.log(new Date().getTime()-ajaxTime);
@@ -136,7 +149,7 @@ function airportClick(e) {
         dataType: "json",
         success: function (data) {
             $('#myModalLabel').html('مشخصات فرودگاه');
-            var html = '<table id="datatable" class="table table-striped table-bordered"> <thead>  </thead> <tbody><tr><td>نام فرودگاه</td><td>'+data.data.name+'</td></tr><tr><td>کشور</td><td>'+data.data.country+'</td></tr><tr><td>شهر</td><td>'+data.data.city+'</td></tr><tr><td>IATA Code</td><td>'+data.data.IATA_Code+'</td></tr><tr><td >ICAO Code</td><td>'+data.data.ICAO_Code+'</td></tr><tr><td>طول جغرافیایی</td><td style="direction: ltr">'+data.data.latitude+'</td></tr><tr><td>عرض جغرافیایی</td><td style="direction: ltr">'+data.data.longitude+'</td></tr> </tbody>';
+            var html = '<table id="datatable" class="table table-striped table-bordered"> <thead>  </thead> <tbody><tr><td>نام فرودگاه</td><td>'+data.data.name+'</td></tr><tr><td>کشور</td><td>'+data.data.country+'</td></tr><tr><td>شهر</td><td>'+data.data.city+'</td></tr><tr><td>IATA Code</td><td>'+data.data.IATA_Code+'</td></tr><tr><td >ICAO Code</td><td>'+data.data.ICAO_Code+'</td></tr><tr><td >ارتفاع (فیت)</td><td>'+data.data.altitude+'</td></tr><tr><td>طول جغرافیایی</td><td style="direction: ltr">'+data.data.latitude+'</td></tr><tr><td>عرض جغرافیایی</td><td style="direction: ltr">'+data.data.longitude+'</td></tr> </tbody>';
             $('#leftModalBody').html(html);
             var infoLink = '';
             $('#infoLink').html(infoLink);

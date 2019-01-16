@@ -13,14 +13,6 @@
 
 
 Route::get('/test', function () {
-    $file = fopen('/home/milad72t/Public/Laravel/FlightTracker/storage/dataset/airlines.dat.txt', 'r');
-    while (($line = fgetcsv($file)) !== FALSE) {
-        if(strlen($line[4]) > 4)
-            dump(1,$line[4]);
-    }
-    fclose($file);
-
-    dd(1);
     dd(\Illuminate\Support\Facades\Auth::user()->permittedFormsName());
     $request = \Illuminate\Http\Request::create('/searchFlight','POST');
     $request->merge(['flightId'=>11]);
