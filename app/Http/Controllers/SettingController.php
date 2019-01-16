@@ -50,4 +50,21 @@ class SettingController extends Controller
             ]);
         }
     }
+
+    public function apiRemovePin($pin_id){
+        $userPin = UserPin::find($pin_id);
+        if($userPin){
+            $userPin->delete();
+            Cache::forget('UserPins_'.$userPin->user_id);
+            return response()->json([
+                'status' => 200,
+                'msg' => 'مکان شما با موفقیت حذف گردید'
+            ]);
+        }else{
+            return response()->json([
+                'status' => 417,
+                'msg' => 'چنین مکانی وجود ندارد'
+            ]);
+        }
+    }
 }

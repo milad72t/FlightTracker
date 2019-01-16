@@ -163,40 +163,102 @@ function addPin(lat,lng,map){
         content: "input",
     }).then((value) => {
         if (!value) return null;
-    $.ajax({
-            url: '/api/addPin',
-            dataType: 'json',
-            type: 'post',
-            contentType: 'application/json',
-            data : JSON.stringify({'userId':userId,'name':value,'type':1,'latitude':lat,'longitude':lng}),
-            success : function(response){
-                console.log(response);
-                if(response.status == 200 ){
-                    swal("انجام شد!", "اضافه کردن مکان شما با موفقیت انجام شد", "success");
-                    fetchData(map);
-                }else{
-                    swal({
-                        title: 'در اضافه کردن مکان شما مشکلی پیش آمده است',
-                        icon: 'error',
-                        background: '#fff url(//bit.ly/1Nqn9HU)',
-                        button: 'بستن'
-                    });
-                }
+        var name = value;
+    swal("لطفا نوع آیکون را انتخاب نمایید", {
+        buttons: {
+            black: {
+                text: "مشکی",
+                value: 1,
             },
-            error: function (response) {
+            iran: {
+                text: "پرچم ایران",
+                value: 2,
+            },
+            red: {
+                text: "پرچم قرمز",
+                value: 3,
+            },
+            green: {
+                text: "پرچم سبز",
+                value: 4,
+            },
+            orange: {
+                text: "نارنجی",
+                value: 5,
+            },
+            cancel: "لغو",
+        },
+    }).then((value) => {
+        if (!value) return null;
+        $.ajax({
+        url: '/api/addPin',
+        dataType: 'json',
+        type: 'post',
+        contentType: 'application/json',
+        data : JSON.stringify({'userId':userId,'name':name,'type':value,'latitude':lat,'longitude':lng}),
+        success : function(response){
+            if(response.status == 200 ){
+                swal("انجام شد!", "اضافه کردن مکان شما با موفقیت انجام شد", "success");
+                fetchData(map);
+            }else{
                 console.log(response);
                 swal({
-                    title: 'متاسفانه اضافه کردن مکان شما در حال حاضر میسر نیست',
+                    title: 'در اضافه کردن مکان شما مشکلی پیش آمده است',
                     icon: 'error',
                     background: '#fff url(//bit.ly/1Nqn9HU)',
                     button: 'بستن'
                 });
             }
+        },
+        error: function (response) {
+            console.log(response);
+            swal({
+                title: 'متاسفانه اضافه کردن مکان شما در حال حاضر میسر نیست',
+                icon: 'error',
+                background: '#fff url(//bit.ly/1Nqn9HU)',
+                button: 'بستن'
+            });
+        }
 
-        });
+    });
+    });
     });
 }
 
-function deletePin() {
-
+function deletePin(e) {
+    swal({
+        title: "آیا اطمینان دارید؟",
+        text: "آیا مطمئن به حذف این مکان هستید؟؟",
+        icon: "warning",
+        // buttons: true,
+        buttons: ["لغو", "بلی"],
+        dangerMode: true,
+        }).then((willDelete) => {
+        if (willDelete) {
+            $.ajax({
+                url: '/api/removePin/'+e.target.options.pinId,
+                dataType: 'json',
+                type: 'get',
+                contentType: 'application/json',
+                success: function (response){
+                    if(response.status == 200 ){
+                        swal("انجام شد!", response.msg, "success");
+                    }else{
+                        swal("ناموفق!", response.msg, "error");
+                    }
+                },
+                error: function (response) {
+                    console.log(response);
+                    swal({
+                        title: 'متاسفانه اضافه کردن مکان شما در حال حاضر میسر نیست',
+                        icon: 'error',
+                        background: '#fff url(//bit.ly/1Nqn9HU)',
+                        button: 'بستن'
+                    });
+                }
+            });
+        } else {
+            swal('حذف مکان شما لغو شد');
+        }
+    });
 }

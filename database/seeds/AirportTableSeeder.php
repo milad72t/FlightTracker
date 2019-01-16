@@ -11,15 +11,26 @@ class AirportTableSeeder extends Seeder
      */
     public function run()
     {
-        $file = fopen('/home/milad72t/Public/Laravel/FlightTracker/storage/airports.csv', 'r');
+        $file = fopen('/home/milad72t/Public/Laravel/FlightTracker/storage/dataset/airports.dat.txt', 'r');
+        $airportDatabase = [];
         while (($line = fgetcsv($file)) !== FALSE) {
-            try {
-                $newAirport = new \App\AirPort();
-                $newAirport->set($line[4],$line[5],$line[1],$line[3],$line[2],1,$line[6],$line[7]);
-            }catch (\Exception $e){
-                dump($e->getMessage());
-            }
+            array_push($airportDatabase,[
+                'name' => str_replace('"','',$line[1]) ,
+                'city' => str_replace('"','',$line[2]) ,
+                'country' => str_replace('"','',$line[3]) ,
+                'IATA_Code' => str_replace('"','',$line[4]) ,
+                'ICAO_Code' => str_replace('"','',$line[5]) ,
+                'latitude' => str_replace('"','',$line[6]) ,
+                'longitude' => str_replace('"','',$line[7]) ,
+                'altitude' => str_replace('"','',$line[8]) ,
+                'active' => 1,
+                'created_at'=> \Carbon\Carbon::now(),
+                'updated_at'=> \Carbon\Carbon::now(),
+            ]);
         }
         fclose($file);
+        $chunks = array_chunk($airportDatabase,500);
+        foreach ($chunks as $chunk)
+            \App\AirPort::insert($chunk);
     }
 }

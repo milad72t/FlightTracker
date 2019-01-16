@@ -20,6 +20,7 @@ class CreateAirportsTable extends Migration
             $table->string('name',100);
             $table->string('country',100);
             $table->string('city',100);
+            $table->integer('altitude')->nullable();
             $table->boolean('active');
             $table->decimal('latitude', 9, 6);
             $table->decimal('longitude', 9, 6);

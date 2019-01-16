@@ -53,6 +53,8 @@ Route::post('addAirport','AirportController@apiAddAirport');
 
 Route::post('addPin','SettingController@apiAddPin');
 
+Route::get('removePin/{pin_id}','SettingController@apiRemovePin');
+
 
 
 
