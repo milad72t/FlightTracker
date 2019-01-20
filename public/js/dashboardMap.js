@@ -38,6 +38,14 @@ function fetchData(map) {
     addMarker(map);
 }
 
+function getValuesOfArray(data) {
+    var b =[];
+    for(var i=0; i<data.length; i++) {
+        b.push([data[i].latitude,data[i].longitude])
+    }
+    return b;
+}
+
 
 function addMarker(map) {
     var ajaxTime= new Date().getTime();
@@ -53,7 +61,6 @@ function addMarker(map) {
         function(data,status){
             removeMarkers(map);
             console.log(new Date().getTime()-ajaxTime);
-            // console.log(data.airports);
             var flightIcon = {
                 iconUrl: '/images/f-icon.png',
                 iconSize: [50, 50]
@@ -72,6 +79,8 @@ function addMarker(map) {
                     angle : element.angle
                 }).on('click',markerOnClick);
                 marker.addTo(map);
+                var polyline = L.polyline(getValuesOfArray(element.lastNPoint), {color: 'red',});
+                polyline.addTo(map);
             });
             var airportIcon = {
                 iconUrl: '/images/airport-icon.png',

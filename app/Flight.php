@@ -31,6 +31,10 @@ class Flight extends Model
         return $this->hasOne(\App\FlightLog::class,'flightId','id')->orderBy('sendTime','DESC');
     }
 
+    public function lastNPoint(){
+        return $this->flightLogs()->orderBy('sendTime','DESC');
+    }
+
     public function airline(){
         return $this->hasOne(\App\AirLine::class,'id','airlineId');
     }

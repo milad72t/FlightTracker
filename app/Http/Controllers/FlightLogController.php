@@ -40,23 +40,27 @@ class FlightLogController extends Controller
     }
 
     public function apiGetLiveFlightsLog(Request $request){
-        $flightLogs = Flight::with('lastFlightLog')->
-            where('finished',false)->select('id','flightNumber','airlineId'
+        $flightLogs = Flight::with(['lastNPoint','lastFlightLog'])->whereHas('lastFlightLog',function ($query)use($request){
+            $query->where('latitude','>',$request->input('south'))->
+                where('latitude','<',$request->input('north'))->
+                where('longitude','>',$request->input('west'))->
+                where('longitude','<',$request->input('east'));
+        })->where('finished',false)->select('id','flightNumber','airlineId'
                 ,'airPlaneId','sourceAirportId','destinationAirportId','departureTime')->get();
         $response = [];
         foreach ($flightLogs as $flightLog){
             if($flightLog->lastFlightLog){
-                if($this->isPointInsideWindow($flightLog->lastFlightLog->latitude,$flightLog->lastFlightLog->longitude,$request)){
-                    array_push($response , [
-                        'flightId' => $flightLog->id,
-                        'flightNumber' => $flightLog->flightNumber,
-                        'altitude' => $flightLog->lastFlightLog->altitude,
-                        'speed' => $flightLog->lastFlightLog->speed,
-                        'angle' => $flightLog->lastFlightLog->angle,
-                        'latitude' => $flightLog->lastFlightLog->latitude,
-                        'longitude' => $flightLog->lastFlightLog->longitude
-                    ]);
-                }
+                array_push($response , [
+                    'flightId' => $flightLog->id,
+                    'flightNumber' => $flightLog->flightNumber,
+                    'altitude' => $flightLog->lastFlightLog->altitude,
+                    'speed' => $flightLog->lastFlightLog->speed,
+                    'angle' => $flightLog->lastFlightLog->angle,
+                    'latitude' => $flightLog->lastFlightLog->latitude,
+                    'longitude' => $flightLog->lastFlightLog->longitude,
+                    'lastNPoint' => $flightLog->lastNPoint->take(10)->makeHidden(
+                        ['sendTime','angle','speed','altitude','flightId','id'])
+                ]);
             }
         }
         return response()->json([
