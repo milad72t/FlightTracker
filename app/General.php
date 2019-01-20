@@ -104,4 +104,10 @@ class General extends Model
             return $gregDate;
         }
     }
+
+    public static function getSettingValue($name){
+        return Cache::remember('Setting_'.$name,24*60,function ()use($name){
+           return Setting::where('name',$name)->value('value');
+        });
+    }
 }

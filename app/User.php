@@ -52,6 +52,10 @@ class User extends Authenticatable
         return array_column($this->permittedForms->toArray(),'name');
     }
 
+    public function permittedFormsId(){
+        return array_column($this->permittedForms->toArray(),'id');
+    }
+
     //accessors
     public function getUserStatusAttribute(){
         if($this->status ==1)

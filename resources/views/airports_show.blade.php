@@ -2,6 +2,9 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
+        $(".clickable-row").click(function () {
+            window.location = $(this).data("href");
+        });
         $('#datatable').DataTable();
     } );
 </script>
@@ -39,7 +42,7 @@
                                     </thead>
                                     <tbody>
                                     @foreach($airports as $airport)
-                                        <tr style="cursor: pointer">
+                                        <tr class='clickable-row' data-href='/airports/edit/{{$airport->id}}' style="cursor: pointer">
                                             <td>{{$airport->id}}</td>
                                             <td >{{$airport->name}}</td>
                                             <td >{{$airport->country}}</td>

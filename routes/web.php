@@ -13,7 +13,7 @@
 
 
 Route::get('/test', function () {
-    dd(\Illuminate\Support\Facades\Auth::user()->permittedFormsName());
+    dd(\App\General::getSettingValue('numOfPoinInFlight'));
     $request = \Illuminate\Http\Request::create('/searchFlight','POST');
     $request->merge(['flightId'=>11]);
     echo \Illuminate\Support\Facades\Route::dispatch($request);
@@ -56,6 +56,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/users/show','ViewController@getUsersShow');
     Route::get('/airports/show','ViewController@getAirportsShow');
     Route::get('/airlines/show','ViewController@getAirlinesShow');
+    Route::get('/airlines/edit/{airlineId}','ViewController@getAirlineEdit');
+    Route::post('/airlines/edit/{airlineId}','ViewController@postAirlineEdit');
     Route::get('/loginLogs/show','ViewController@getLoginLogs');
     Route::get('/settings/show','ViewController@getSettingShow');
     Route::post('/settings/show','ViewController@postSettingShow');
@@ -63,6 +65,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/airlines/add','ViewController@PostAddAirline');
     Route::get('/airports/add','ViewController@getAirportAdd');
     Route::post('/airports/add','ViewController@postAirportAdd');
+    Route::get('/airports/edit/{airportId}','ViewController@getAirportEdit');
+    Route::post('/airports/edit/{airportId}','ViewController@postAirportEdit');
+    Route::get('/users/edit/{userId}','ViewController@getUserEdit');
+    Route::post('/users/edit/{userId}','ViewController@postUserEdit');
 
 
 });

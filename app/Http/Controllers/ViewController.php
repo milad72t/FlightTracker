@@ -158,4 +158,59 @@ class ViewController extends Controller
         else
             return redirect()->intended('/airports/add')->withInput()->withErrors($response->msg);
     }
+
+    public function getUserEdit($userId){
+        $request = Request::create('/api/getUserInfo/'.$userId, 'GET');
+        $response = Route::dispatch($request)->getData();
+        $forms = Form::all();
+        if($response->status == 200 )
+            return view('users_edit')->with(['userInfo'=>$response->data , 'forms'=>$forms]);
+        else
+            return redirect()->intended('/dashboard')->with('notification' , $response->msg);
+    }
+
+    public function postUserEdit($userId){
+        $request = Request::create('/api/updateUser', 'POST');
+        $response = Route::dispatch($request)->getData();
+        if($response->status == 200 )
+            return redirect()->intended('/users/edit/'.$userId)->with('notification' , $response->msg) ;
+        else
+            return redirect()->intended('/users/edit/'.$userId)->withInput( )->withErrors($response->msg);
+    }
+
+    public function getAirlineEdit($airlineId){
+        $request = Request::create('/api/getAirlineInfo/'.$airlineId, 'GET');
+        $response = Route::dispatch($request)->getData();
+        if($response->status == 200 )
+            return view('airline_edit')->with('airlineInfo',$response->data );
+        else
+            return redirect()->intended('/dashboard')->with('notification' , $response->msg);
+    }
+
+    public function postAirlineEdit($airlineId){
+        $request = Request::create('/api/updateAirline', 'POST');
+        $response = Route::dispatch($request)->getData();
+        if($response->status == 200 )
+            return redirect()->intended('/airlines/edit/'.$airlineId)->with('notification' , $response->msg) ;
+        else
+            return redirect()->intended('/airlines/edit/'.$airlineId)->withInput( )->withErrors($response->msg);
+    }
+
+    public function getAirportEdit($airportId){
+        $request = Request::create('/api/getAirportInfo/'.$airportId, 'GET');
+        $response = Route::dispatch($request)->getData();
+        if($response->status == 200 )
+            return view('airport_edit')->with('airportInfo',$response->data );
+        else
+            return redirect()->intended('/dashboard')->with('notification' , $response->msg);
+    }
+
+    public function postAirportEdit($airportId){
+        $request = Request::create('/api/updateAirport', 'POST');
+        $response = Route::dispatch($request)->getData();
+        if($response->status == 200 )
+            return redirect()->intended('/airports/edit/'.$airportId)->with('notification' , $response->msg) ;
+        else
+            return redirect()->intended('/airports/edit/'.$airportId)->withInput( )->withErrors($response->msg);
+    }
 }

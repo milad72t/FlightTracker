@@ -2,8 +2,11 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
+        $(".clickable-row").click(function () {
+            window.location = $(this).data("href");
+        });
         $('#datatable').DataTable();
-    } );
+    });
 </script>
 
 <div class="row">
@@ -38,16 +41,16 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($airlines as $airlines)
-                                    <tr style="cursor: pointer">
-                                        <td>{{$airlines->id}}</td>
-                                        <td >{{$airlines->name}}</td>
-                                        <td >{{$airlines->alias}}</td>
-                                        <td >{{$airlines->IATA_Code}}</td>
-                                        <td >{{$airlines->ICAO_Code}}</td>
-                                        <td >{{$airlines->callSign}}</td>
-                                        <td >{{$airlines->country}}</td>
-                                        @if($airlines->active)
+                                    @foreach($airlines as $airline)
+                                        <tr class='clickable-row' data-href='/airlines/edit/{{$airline->id}}' style="cursor: pointer">
+                                        <td>{{$airline->id}}</td>
+                                        <td >{{$airline->name}}</td>
+                                        <td >{{$airline->alias}}</td>
+                                        <td >{{$airline->IATA_Code}}</td>
+                                        <td >{{$airline->ICAO_Code}}</td>
+                                        <td >{{$airline->callSign}}</td>
+                                        <td >{{$airline->country}}</td>
+                                        @if($airline->active ==1)
                                             <td style="background-color: #00b300; color: #ffffff;">فعال</td>
                                         @else
                                             <td style="background-color: #ff4d4d; color: #ffffff;">غیرفعال</td>

@@ -37,7 +37,8 @@ class AirportController extends Controller
                 'name' => 'required | string | max:100',
                 'IATA_Code' => 'required | string | max:3',
                 'ICAO_Code' => 'nullable | string | max:4',
-                'status' => 'required | boolean',
+                'status' => 'required | integer',
+                'altitude' => 'nullable | integer',
                 'country' => 'required | string | max:50',
                 'city' => 'required | string | max:50',
                 'latitude' => 'required | numeric',
@@ -46,7 +47,7 @@ class AirportController extends Controller
         if($validator->passes()){
             $airport = new AirPort();
             $airport->set($request->get('IATA_Code'),$request->get('ICAO_Code'),$request->get('name'),
-                $request->get('country'),$request->get('city'),$request->get('status'),
+                $request->get('country'),$request->get('city'),$request->get('status'),$request->get('altitude'),
                 $request->get('latitude'),$request->get('longitude'));
             Cache::forget('ActiveAirportsInfo');
             Cache::forget('AllActiveAirports');
@@ -59,6 +60,40 @@ class AirportController extends Controller
             return response()->json([
                'status' => 400,
                'msg' => $validator->messages(),
+            ]);
+        }
+    }
+
+    public function apiUpdateAirport(Request $request){
+        $validator = Validator::make($request->all(),
+            [
+                'Id' => 'required | integer | exists:airports,id',
+                'name' => 'required | string | max:100',
+                'IATA_Code' => 'nullable | string | max:3',
+                'ICAO_Code' => 'nullable | string | max:4',
+                'status' => 'required | integer',
+                'altitude' => 'nullable | integer',
+                'country' => 'required | string | max:50',
+                'city' => 'required | string | max:50',
+                'latitude' => 'required | numeric',
+                'longitude' => 'required | numeric',
+            ]);
+        if($validator->passes()){
+            $airport = AirPort::find($request->get('Id'));
+            $airport->set($request->get('IATA_Code'),$request->get('ICAO_Code'),$request->get('name'),
+                $request->get('country'),$request->get('city'),$request->get('status'),$request->get('altitude'),
+                $request->get('latitude'),$request->get('longitude'));
+            Cache::forget('ActiveAirportsInfo');
+            Cache::forget('AllActiveAirports');
+            return response()->json([
+                'status' => 200,
+                'msg' => 'به روز رسانی اطلاعات فرودگاه مورد نظر با موفقیت انجام شد'
+            ]);
+
+        }else{
+            return response()->json([
+                'status' => 400,
+                'msg' => $validator->messages(),
             ]);
         }
     }

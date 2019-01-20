@@ -2,6 +2,9 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
+        $(".clickable-row").click(function() {
+            window.location = $(this).data("href");
+        });
         $('#datatable').DataTable();
     } );
 </script>
@@ -37,7 +40,7 @@
 
                                         <tbody>
                                         @foreach($users as $index=>$item)
-                                            <tr style="cursor: pointer">
+                                            <tr class='clickable-row' data-href='/users/edit/{{$item->id}}' style="cursor: pointer">
                                                 <td>{{$index +1}}</td>
                                                 <td>{{$item->username}}</td>
                                                 <td>{{$item->firstName}}</td>

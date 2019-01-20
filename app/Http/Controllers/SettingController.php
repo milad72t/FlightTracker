@@ -20,6 +20,7 @@ class SettingController extends Controller
     public function apiUpdateSettings(Request $request){
         foreach ($request->all() as $key=>$value)
             Setting::where('name',$key)->update(['value'=>$value]);
+        Cache::forget('Setting_numOfPoinInFlight');
         return response()->json([
             'status' => 200,
             'msg' => 'به روز رسانی تنظیمات با موفقیت انجام شد'

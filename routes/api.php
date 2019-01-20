@@ -35,13 +35,19 @@ Route::get('setFlightFinished/{flight_id}','FlightController@apiSetFlightFinishe
 
 Route::post('addUser','UserController@apiAddUser');
 
+Route::post('updateUser','UserController@apiUpdateUser');
+
 Route::get('getAllUsers','UserController@apiGetAllUsers');
+
+Route::get('getUserInfo/{userId}','UserController@apiGetUserInfo');
 
 Route::get('getAllAirports','AirportController@apiGetAllAirports');
 
 Route::get('getAllAirportsName','AirportController@apiGetAllAirportsName');
 
 Route::get('getAllAirlines','AirlinesController@apiGetAllAirlines');
+
+Route::get('getAirlineInfo/{airlineId}','AirlinesController@apiGetAirlineInfo');
 
 Route::get('getLoginLogs','AuthController@apiGetLoginLogs');
 
@@ -51,7 +57,11 @@ Route::post('updateSettings','SettingController@apiUpdateSettings');
 
 Route::post('addAirline','AirlinesController@apiAddAirline');
 
+Route::post('updateAirline','AirlinesController@apiUpdateAirline');
+
 Route::post('addAirport','AirportController@apiAddAirport');
+
+Route::post('updateAirport','AirportController@apiUpdateAirport');
 
 Route::post('addPin','SettingController@apiAddPin');
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\AirPort;
 use App\Flight;
+use App\General;
 use App\UserPin;
 use Illuminate\Http\Request;
 use DB;
@@ -47,6 +48,7 @@ class FlightLogController extends Controller
                 where('longitude','<',$request->input('east'));
         })->where('finished',false)->select('id','flightNumber','airlineId'
                 ,'airPlaneId','sourceAirportId','destinationAirportId','departureTime')->get();
+        $pointNumber = (integer)General::getSettingValue('numOfPoinInFlight');
         $response = [];
         foreach ($flightLogs as $flightLog){
             if($flightLog->lastFlightLog){
@@ -58,7 +60,7 @@ class FlightLogController extends Controller
                     'angle' => $flightLog->lastFlightLog->angle,
                     'latitude' => $flightLog->lastFlightLog->latitude,
                     'longitude' => $flightLog->lastFlightLog->longitude,
-                    'lastNPoint' => $flightLog->lastNPoint->take(10)->makeHidden(
+                    'lastNPoint' => $flightLog->lastNPoint->take($pointNumber)->makeHidden(
                         ['sendTime','angle','speed','altitude','flightId','id'])
                 ]);
             }
