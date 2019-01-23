@@ -13,7 +13,7 @@
 
 
 Route::get('/test', function () {
-    dd(\App\General::getSettingValue('numOfPoinInFlight'));
+    dd(json_encode([['lable'=>'slam','value'=>1],['lable'=>'fasd','value'=>2]]));
     $request = \Illuminate\Http\Request::create('/searchFlight','POST');
     $request->merge(['flightId'=>11]);
     echo \Illuminate\Support\Facades\Route::dispatch($request);

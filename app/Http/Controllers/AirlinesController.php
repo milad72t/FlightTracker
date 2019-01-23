@@ -81,4 +81,24 @@ class AirlinesController extends Controller
             ]);
         }
     }
+
+    public function apiSearchAirline(Request $request){
+        $validator = Validator::make($request->all(),
+            [
+                'search' => 'required | string | max:100',
+            ]);
+        if($validator->passes()){
+            $airlines = AirLine::where('name','like','%'.$request->get('search').'%')->
+                select('id as value','name as label')->get()->toArray();
+            return response()->json([
+                'status' => 200,
+                'data' => $airlines
+            ]);
+        }else{
+            return response()->json([
+                'status' => 400,
+                'msg' => $validator->messages()
+            ]);
+        }
+    }
 }

@@ -27,6 +27,8 @@ Route::get('getAllFlightInfo/{flightId}','FlightController@apiGetAllFlightInfo')
 
 Route::get('getAirportInfo/{airportId}','AirportController@apiGetAirportInfo');
 
+Route::post('searchAirport','AirportController@apiSearchAirport');
+
 Route::post('setNewFlight','FlightController@apiSetNewFlight');
 
 Route::post('changePassword/{user_id}','UserController@apiChangePassword');
@@ -48,6 +50,8 @@ Route::get('getAllAirportsName','AirportController@apiGetAllAirportsName');
 Route::get('getAllAirlines','AirlinesController@apiGetAllAirlines');
 
 Route::get('getAirlineInfo/{airlineId}','AirlinesController@apiGetAirlineInfo');
+
+Route::post('searchAirline','AirlinesController@apiSearchAirline');
 
 Route::get('getLoginLogs','AuthController@apiGetLoginLogs');
 

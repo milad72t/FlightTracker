@@ -11,6 +11,8 @@ class FlightController extends Controller
 {
     public function apiGetFlightInfo($flightId){
         $flight = Flight::find($flightId);
+        if($flight)
+            $flight->layerLatLng = $flight->layerFlightLatLng();
         return response()->json([
            'status' => 200,
             'data' => $flight

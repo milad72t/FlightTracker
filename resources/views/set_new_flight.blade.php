@@ -6,6 +6,7 @@
 <script src="/js/calendar/calendar-setup.js"></script>
 <script src="/js/calendar/lang/calendar-fa.js"></script>
 <script src="/js/farsitype/farsitype.js"></script>
+<script src="/js/autocomplete.js" ></script>
 <style>
     .col-md-1{
         width: 10%;
@@ -36,12 +37,8 @@
                         <label class="control-label col-md-1 col-sm-1 col-xs-12" for="last-name">شرکت هواپیمایی<span class="required">*</span>
                         </label>
                         <div class="col-md-4 col-sm-4 col-xs-12">
-                            <select id="airlineId" name="airlineId" class="form-control" required>
-                                <option value="" selected>انتخاب نمایید...</option>
-                                @foreach($airlines as $airline)
-                                    <option value="{{$airline['id']}}">{{$airline['name']}}</option>
-                                @endforeach
-                            </select>
+                            <input type="text" style="z-index: 99" id="autocompleteAirline" name="airlineName" required="required" class="form-control col-md-7 col-xs-12">
+                            <input type='hidden' id='airlineId' name="airlineId">
                             @if($errors->has('airlineId'))
                                 <h5 style="color: red ;direction: rtl ; margin-top: 40px; margin-bottom: -3px" >{{$errors->first('airlineId')}}</h5>
                             @endif
@@ -74,12 +71,8 @@
                         <label class="control-label col-md-1 col-sm-1 col-xs-12" for="password">فرودگاه مبدا <span class="required">*</span>
                         </label>
                         <div class="col-md-4 col-sm-4 col-xs-12">
-                            <select id="sourceAirportId" name="sourceAirportId" class="form-control" required>
-                                <option value="" selected>انتخاب نمایید...</option>
-                                @foreach($airports as $airport)
-                                    <option value="{{$airport['id']}}">{{$airport['name']}}</option>
-                                @endforeach
-                            </select>
+                            <input type="text" id="autocompleteSourceAirport" name="airportName" required="required" class="form-control col-md-7 col-xs-12">
+                            <input type='hidden' id='sourceAirportId' name="sourceAirportId">
                             @if($errors->has('sourceAirportId'))
                                 <h5 style="color: red ;direction: rtl ; margin-top: 40px; margin-bottom: -3px" >{{$errors->first('sourceAirportId')}}</h5>
                             @endif
@@ -87,12 +80,8 @@
                         <label class="control-label col-md-1 col-sm-1 col-xs-12" for="password">فرودگاه مقصد<span class="required">*</span>
                         </label>
                         <div class="col-md-4 col-sm-4 col-xs-12">
-                        <select id="destinationAirportId" name="destinationAirportId" class="form-control" required>
-                            <option value="" selected>انتخاب نمایید...</option>
-                            @foreach($airports as $airport)
-                                <option value="{{$airport['id']}}">{{$airport['name']}}</option>
-                            @endforeach
-                        </select>
+                            <input type="text" id="autocompleteDestinationAirport" name="airportName" required="required" class="form-control col-md-7 col-xs-12">
+                            <input type='hidden' id='destinationAirportId' name="destinationAirportId">
                         @if($errors->has('destinationAirportId'))
                             <h5 style="color: red ;direction: rtl ; margin-top: 40px; margin-bottom: -3px" >{{$errors->first('destinationAirportId')}}</h5>
                         @endif

@@ -97,4 +97,24 @@ class AirportController extends Controller
             ]);
         }
     }
+
+    public function apiSearchAirport(Request $request){
+        $validator = Validator::make($request->all(),
+            [
+                'search' => 'required | string | max:100',
+            ]);
+        if($validator->passes()){
+            $airport = AirPort::where('name','like','%'.$request->get('search').'%')->
+            select('id as value','name as label')->get()->toArray();
+            return response()->json([
+                'status' => 200,
+                'data' => $airport
+            ]);
+        }else{
+            return response()->json([
+                'status' => 400,
+                'msg' => $validator->messages()
+            ]);
+        }
+    }
 }

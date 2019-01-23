@@ -12,10 +12,8 @@ use Illuminate\Support\Facades\Route;
 class ViewController extends Controller
 {
     public function getNewFlightPage(){
-        $airlines = General::getAllActiveAirlines();
         $airplanes = General::getAllAirPlanes();
-        $airports = General::getAllActiveAirports();
-        return view('set_new_flight')->with(['airlines'=>$airlines,'airplanes'=>$airplanes,'airports'=>$airports]);
+        return view('set_new_flight')->with('airplanes',$airplanes);
     }
 
     public function postNewFlightPage(){
