@@ -13,6 +13,11 @@
 
 
 Route::get('/test', function () {
+//    dd(\App\General::getSettingValue('finishFlightTimeout'));
+    $aa = new \App\CronJobClass();
+    dd($aa->finishFlights());
+    $f = new \App\FinishFlight(\App\Flight::find(23));
+    dd($f->finish());
     dd(json_encode([['lable'=>'slam','value'=>1],['lable'=>'fasd','value'=>2]]));
     $request = \Illuminate\Http\Request::create('/searchFlight','POST');
     $request->merge(['flightId'=>11]);

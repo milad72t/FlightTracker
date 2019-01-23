@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFlightLogsTable extends Migration
+class CreateFinishedFlightLogs extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateFlightLogsTable extends Migration
      */
     public function up()
     {
-        Schema::create('flight_logs', function (Blueprint $table) {
+        Schema::create('finished_flight_logs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('flightId');
             $table->integer('altitude');
@@ -32,6 +32,6 @@ class CreateFlightLogsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('flight_logs');
+        Schema::dropIfExists('finished_flight_logs');
     }
 }

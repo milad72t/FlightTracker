@@ -24,11 +24,18 @@ class Flight extends Model
     }
 
     public function flightLogs(){
-        return $this->hasMany(\App\FlightLog::class,'flightId','id');
+        if($this->finished == 0)
+            return $this->hasMany(FlightLog::class,'flightId','id');
+        else
+            return $this->hasMany(FinishedFlightLogs::class,'flightId','id');
+
     }
 
     public function lastFlightLog(){
-        return $this->hasOne(\App\FlightLog::class,'flightId','id')->orderBy('sendTime','DESC');
+        if($this->finished == 0)
+            return $this->hasOne(FlightLog::class,'flightId','id')->orderBy('sendTime','DESC');
+        else
+            return $this->hasOne(FinishedFlightLogs::class,'flightId','id')->orderBy('sendTime','DESC');
     }
 
     public function lastNPoint(){

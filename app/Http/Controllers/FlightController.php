@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\FinishFlight;
 use App\Flight;
 use App\General;
 use Illuminate\Http\Request;
@@ -20,9 +21,11 @@ class FlightController extends Controller
     }
 
     public function apiGetAllFlightInfo($flightId){
-        $flight = Flight::with(['lastFlightLog','airline','airplane','sourceAirport','destAirPort'])->find($flightId);
-        if($flight)
+        $flight = Flight::with(['airline','airplane','sourceAirport','destAirPort'])->find($flightId);
+        if($flight){
             $flight->layerFlightLatLng = $flight->layerFlightLatLng();
+            $flight->last_flight_log = $flight->lastFlightLog;
+        }
         return response()->json([
             'status' => 200,
             'data' => $flight
@@ -58,12 +61,18 @@ class FlightController extends Controller
     public function apiSetFlightFinished($flightId){
         $flight = Flight::find($flightId);
         if($flight){
-            $flight->finished = 1;
-            $flight->save();
-            return response()->json([
-                'status' => 200,
-                'msg' => 'اتمام پرواز مورد نظر در سامانه به ثبت رسید'
-            ]);
+            $finishFlight = new FinishFlight($flight);
+            $status = $finishFlight->finish();
+            if($status)
+                return response()->json([
+                    'status' => 200,
+                    'msg' => 'اتمام پرواز مورد نظر در سامانه به ثبت رسید'
+                ]);
+            else
+                return response()->json([
+                    'status' => 417,
+                    'msg' => 'متاسفانه در انجام درخواست شما مشکلی پیش آمده است'
+                ]);
         }else{
             return response()->json([
                 'status' => 417,
