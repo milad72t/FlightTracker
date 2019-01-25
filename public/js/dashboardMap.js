@@ -1,4 +1,15 @@
 $(document).ready(function(){
+    // $('#datatable').DataTable({
+    //     "language": {
+    //         "search": "جستجو:"
+    //     },
+    //     "lengthChange": false,
+    //     // "pageLength": 10
+    //
+    // });
+    // $('.dataTables_filter input[type="search"]').
+    // attr('placeholder','فیلتر پرواز').
+    // css({'width':'100%','display':'inline-block'});
     $.getScript("/js/mousePosition.js", function(){
     var mapOptions = {
         center: [19.093266636089712, -102.249755859375],
@@ -29,8 +40,15 @@ $(document).ready(function(){
     map.on('click', function(e) {
         addPin(e.latlng.lat,e.latlng.lng,map);
     });
+    $("#removeTargetTable").click(function () {
+        $("#targetTable").toggle();
+        var isTableHidden = $("#targetTable").is(":hidden");
+        if(isTableHidden)
+            $("#map").css('width','100%');
+        else
+            $("#map").css('width','');
+    })
     });
-
 });
 
 
@@ -55,7 +73,6 @@ function addMarker(map) {
         getAirport = 1;
     else
         getAirport = 0;
-
     $.get('/api/getLiveFlightsLog?east='+map.getBounds().getEast()+'&west='+map.getBounds().getWest()
         +'&north='+map.getBounds().getNorth()+'&south='+map.getBounds().getSouth()+'&getAirports='+getAirport+'&id='+userId,
         function(data,status){
@@ -66,6 +83,7 @@ function addMarker(map) {
                 iconSize: [50, 50]
             };
             var customFlightIcon = L.icon(flightIcon);
+            $("tbody").html('');
             $.each(data.flights, function (index, element) {
                 var marker = new L.Marker([element.latitude, element.longitude],{
                     title: element.flightNumber+"\n"+'ارتفاع : ' + element.altitude+"\n"+' سرعت : '+element.speed+"\n"+" زاویه : "+element.angle,
@@ -81,6 +99,8 @@ function addMarker(map) {
                     markerOnClick(e,map);
                 });
                 marker.addTo(map);
+                var flightRow = '<tr><td>'+element.flightNumber+'</td><td>'+element.speed+'</td><td>'+element.altitude+'</td><td>'+element.latitude+'</td><td>'+element.longitude+'</td></tr>';
+                $("tbody").append(flightRow);
                 var polyline = L.polyline(getValuesOfArray(element.lastNPoint), {
                     color: 'green',
                     weight: 5,

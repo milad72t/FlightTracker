@@ -149,6 +149,7 @@ $permittedForms = \Illuminate\Support\Facades\Cache::remember('PermForms_'.\Illu
                 <nav>
                     <div class="nav toggle">
                         <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                        <button type="button" id="removeTargetTable" class="btn btn-primary" style="margin-right: 50px;position: fixed">حذف/نمایش جدول هدف</button>
                     </div>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="">
@@ -165,13 +166,13 @@ $permittedForms = \Illuminate\Support\Facades\Cache::remember('PermForms_'.\Illu
 
                             </ul>
                         </li>
-                                </li>
+                        </li>
                                 <li>
                                     <div class="text-center">
                                     </div>
                                 </li>
                             </ul>
-                        </li>
+                    </li>
                     </ul>
                 </nav>
             </div>

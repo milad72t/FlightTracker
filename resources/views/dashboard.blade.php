@@ -17,8 +17,23 @@
     </div><!-- modal-dialog -->
 </div><!-- modal -->
 
-<div id="map" style="position:relative ; width: 100%; height: 580px"></div>
-
+<div class="container">
+    <div class="col-lg-8 col-md-9 col-xs-12" id="map" style="position:relative ;width:''; height: 600px"></div>
+    <div class="col-lg-4 col-md-3 col-xs-12" id="targetTable" style="overflow: scroll;position:relative;margin-top: 20px ; height: 600px">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>شماره پرواز</th>
+                <th>سرعت</th>
+                <th>ارتفاع</th>
+                <th>طول جغرافیایی</th>
+                <th>عرض جغرافیایی</th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
 <script>var userId = <?php echo \Illuminate\Support\Facades\Auth::user()->id ?></script>
 <script type="text/javascript" src="/js/dashboardMap.js"></script>
 <link rel="stylesheet" type="text/css" href="/css/mousePosition.css">
