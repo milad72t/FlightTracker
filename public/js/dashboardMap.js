@@ -1,15 +1,4 @@
 $(document).ready(function(){
-    // $('#datatable').DataTable({
-    //     "language": {
-    //         "search": "جستجو:"
-    //     },
-    //     "lengthChange": false,
-    //     // "pageLength": 10
-    //
-    // });
-    // $('.dataTables_filter input[type="search"]').
-    // attr('placeholder','فیلتر پرواز').
-    // css({'width':'100%','display':'inline-block'});
     $.getScript("/js/mousePosition.js", function(){
     var mapOptions = {
         center: [19.093266636089712, -102.249755859375],
@@ -33,7 +22,16 @@ $(document).ready(function(){
     }).addTo(map);
     scale.addTo(map);
     fetchData(map);
-    setInterval(function(){fetchData(map);},4000);
+    var searchControl = new L.esri.Controls.Geosearch().addTo(map);
+    var results = new L.LayerGroup().addTo(map);
+    searchControl.on('results', function(data){
+        results.clearLayers();
+        for (var i = data.results.length - 1; i >= 0; i--) {
+            results.addLayer(L.marker(data.results[i].latlng));
+        }
+    });
+    setTimeout(function(){$('.pointer').fadeOut('slow');},3400);
+        setInterval(function(){fetchData(map);},4000);
     map.on('moveend', function () {
         fetchData(map);
     });
