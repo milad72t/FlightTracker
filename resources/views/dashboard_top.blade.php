@@ -149,10 +149,11 @@ $permittedForms = \Illuminate\Support\Facades\Cache::remember('PermForms_'.\Illu
                 <nav>
                     <div class="nav toggle">
                         <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-                        @if(\Illuminate\Support\Facades\Route::current()->getName())
-                            <button type="button" id="removeTargetTable" class="btn btn-primary" style="margin-right: 50px;position: fixed">حذف/نمایش جدول هدف</button>
-                        @endif
                     </div>
+                    @if(\Illuminate\Support\Facades\Route::current()->getName())
+                        <button type="button" id="removeTargetTable" class="btn btn-primary" style="margin-top: 10px">حذف جدول هدف</button>
+                        <button type="button" id="enableAddPin" class="btn btn-primary" style="margin-top: 10px">فعال کردن افزودن مکان</button>
+                    @endif
                     <ul class="nav navbar-nav navbar-right">
                         <li class="">
                             <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">

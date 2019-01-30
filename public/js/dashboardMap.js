@@ -1,5 +1,6 @@
 $(document).ready(function(){
     $.getScript("/js/mousePosition.js", function(){
+    var enableAddPin = false;
     var mapOptions = {
         center: [19.093266636089712, -102.249755859375],
         zoom: 7,
@@ -21,6 +22,10 @@ $(document).ready(function(){
         prefix: 'mouse position : '
     }).addTo(map);
     scale.addTo(map);
+    map.pm.addControls({
+        position: 'topleft',
+        drawMarker : false
+    });
     fetchData(map);
     var searchControl = new L.esri.Controls.Geosearch().addTo(map);
     var results = new L.LayerGroup().addTo(map);
@@ -36,15 +41,27 @@ $(document).ready(function(){
         fetchData(map);
     });
     map.on('click', function(e) {
-        addPin(e.latlng.lat,e.latlng.lng,map);
+        if(enableAddPin)
+            addPin(e.latlng.lat,e.latlng.lng,map);
     });
     $("#removeTargetTable").click(function () {
         $("#targetTable").toggle();
         var isTableHidden = $("#targetTable").is(":hidden");
-        if(isTableHidden)
+        if(isTableHidden){
             $("#map").css('width','100%');
-        else
+            $("#removeTargetTable").html('نمایش جدول هدف');
+        }else{
             $("#map").css('width','');
+            $("#removeTargetTable").html('حذف جدول هدف');
+        }
+    });
+    $("#enableAddPin").click(function () {
+        enableAddPin = !enableAddPin;
+        if(enableAddPin){
+            $("#enableAddPin").html('غیر فعال کردن افزودن مکان');
+        }else{
+            $("#enableAddPin").html('فعال کردن افزودن مکان');
+        }
     })
     });
 });
@@ -80,7 +97,7 @@ function addMarker(map) {
                 iconSize: [50, 50]
             };
             var customFlightIcon = L.icon(flightIcon);
-            $("tbody").html('');
+            $("#TargetTable").html('');
             $.each(data.flights, function (index, element) {
                 var marker = new L.Marker([element.latitude, element.longitude],{
                     title: element.flightNumber+"\n"+'ارتفاع : ' + element.altitude+"\n"+' سرعت : '+element.speed+"\n"+" زاویه : "+element.angle,
@@ -97,7 +114,7 @@ function addMarker(map) {
                 });
                 marker.addTo(map);
                 var flightRow = '<tr><td>'+element.flightNumber+'</td><td>'+element.speed+'</td><td>'+element.altitude+'</td><td>'+element.latitude+'</td><td>'+element.longitude+'</td></tr>';
-                $("tbody").append(flightRow);
+                $("#TargetTable").append(flightRow);
                 var polyline = L.polyline(getValuesOfArray(element.lastNPoint), {
                     color: 'green',
                     weight: 5,

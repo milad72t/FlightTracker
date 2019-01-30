@@ -30,7 +30,7 @@
                 <th>عرض جغرافیایی</th>
             </tr>
             </thead>
-            <tbody></tbody>
+            <tbody id="TargetTable"></tbody>
         </table>
     </div>
 </div>
