@@ -13,11 +13,12 @@
 
 
 Route::get('/test', function () {
+//    dd(\Illuminate\Support\Facades\Route::current());
 //    dd(\App\General::getSettingValue('finishFlightTimeout'));
-    $aa = new \App\CronJobClass();
-    dd($aa->finishFlights());
-    $f = new \App\FinishFlight(\App\Flight::find(23));
-    dd($f->finish());
+//    $aa = new \App\CronJobClass();
+//    dd($aa->finishFlights());
+//    $f = new \App\FinishFlight(\App\Flight::find(23));
+//    dd($f->finish());
     dd(json_encode([['lable'=>'slam','value'=>1],['lable'=>'fasd','value'=>2]]));
     $request = \Illuminate\Http\Request::create('/searchFlight','POST');
     $request->merge(['flightId'=>11]);
@@ -49,7 +50,7 @@ Route::group(['middleware' => ['auth']], function () {
     });
     Route::get('/dashboard',function (){
         return view('dashboard');
-    });
+    })->name('dashboard');
     Route::get('/setNewFlight','ViewController@getNewFlightPage');
     Route::post('/setNewFlight','ViewController@postNewFlightPage');
     Route::get('/dashboard/changePassword','ViewController@getChangePassword');

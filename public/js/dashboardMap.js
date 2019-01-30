@@ -31,7 +31,7 @@ $(document).ready(function(){
         }
     });
     setTimeout(function(){$('.pointer').fadeOut('slow');},3400);
-        setInterval(function(){fetchData(map);},4000);
+    setInterval(function(){fetchData(map);},4000);
     map.on('moveend', function () {
         fetchData(map);
     });
@@ -61,7 +61,6 @@ function getValuesOfArray(data) {
     }
     return b;
 }
-
 
 function addMarker(map) {
     var ajaxTime= new Date().getTime();
@@ -212,7 +211,6 @@ function airportClick(e) {
     });
 }
 
-
 function addPin(lat,lng,map){
     swal("لطفا نامی برای مکان خود انتخاب کنید:", {
         content: "input",
@@ -238,7 +236,7 @@ function addPin(lat,lng,map){
                 value: 4,
             },
             orange: {
-                text: "نارنجی",
+                text: "پرچم مشکی",
                 value: 5,
             },
             cancel: "لغو",
