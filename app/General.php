@@ -110,4 +110,10 @@ class General extends Model
            return Setting::where('name',$name)->value('value');
         });
     }
+
+    public static function getUserPermittedForm($user){
+        return Cache::remember('UserPermittedForm_'.$user->id,24*60,function ()use($user){
+            return $user->permittedForms;
+        });
+    }
 }

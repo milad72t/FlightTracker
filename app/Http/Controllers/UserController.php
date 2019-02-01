@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -138,6 +139,8 @@ class UserController extends Controller
                 $user->password = Hash::make($request->get('password'));
             $user->save();
             $user->permittedForms()->attach($request->get('FormIds'));
+            Cache::forget('UserPermittedForm_'.$request->get('Id'));
+            Cache::forget('PermForms_'.$request->get('Id'));
             return response()->json([
                 'status' => 200,
                 'msg' => 'به روز رسانی کاربر با موفقیت انجام شد'

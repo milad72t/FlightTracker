@@ -13,13 +13,16 @@
 
 
 Route::get('/test', function () {
+    dd(preg_replace('/[0-9]+/', '', '/airports/edit/5'));
+    $user = \App\General::getUserPermittedForm(\Illuminate\Support\Facades\Auth::user());
+    dd(array_column($user->toArray(),'url'));
 //    dd(\Illuminate\Support\Facades\Route::current());
 //    dd(\App\General::getSettingValue('finishFlightTimeout'));
 //    $aa = new \App\CronJobClass();
 //    dd($aa->finishFlights());
 //    $f = new \App\FinishFlight(\App\Flight::find(23));
 //    dd($f->finish());
-    dd(json_encode([['lable'=>'slam','value'=>1],['lable'=>'fasd','value'=>2]]));
+    dd(json_encode([['l able'=>'slam','value'=>1],['lable'=>'fasd','value'=>2]]));
     $request = \Illuminate\Http\Request::create('/searchFlight','POST');
     $request->merge(['flightId'=>11]);
     echo \Illuminate\Support\Facades\Route::dispatch($request);
@@ -44,7 +47,7 @@ Route::get('/login',function (){
 Route::post('/login', 'AuthController@postLoginPage');
 
 
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['auth',\App\Http\Middleware\CheckAccess::class]], function () {
     Route::get('/simpleView',function (){
         return view('test');
     });
