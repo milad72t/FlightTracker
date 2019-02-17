@@ -12,12 +12,12 @@
 
 <!-- jQuery -->
 <script src="/vendors/jquery/dist/jquery.min.js"></script>
-<link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
-<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
+<link href="/css/jquery/jquery-ui.css" rel="Stylesheet"></link>
+<script src="/js/jquery/jquery-ui.js" ></script>
 
 
 <!-- Bootstrap -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="/js/bootstrap/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/bootstrap-multiselect.js"></script>
 
@@ -51,14 +51,14 @@
 <script src="/vendors/flot.curvedlines/curvedLines.js"></script>
 
 <!-- Data Table -->
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/bootstrap/dataTables.bootstrap.min.css">
+<script src="/js/jquery/jquery.dataTables.min.js"></script>
+<script src="/js/bootstrap/dataTables.bootstrap.min.js"></script>
 
 <!-- DateJS -->
 <script src="/vendors/DateJS/build/date.js"></script>
 <!-- SweetAlert -->
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="/js/sweet-alert/sweetalert.min.js"></script>
 
 
 <!-- Custom Theme Scripts -->
@@ -67,16 +67,16 @@
 <script src="/js/dashboard_top.js"></script>
 
 <!-- Leaflet Related -->
-<link rel = "stylesheet" href = "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css"/>
-<script src = "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin=""/>
+<link rel = "stylesheet" href = "/css/leaflet/leaflet.css"/>
+<script src = "/js/leaflet/leaflet.js"></script>
+{{--<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin=""/>--}}
 <link rel="stylesheet" href="/css/leaflet-measure.css">
-<script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
-<script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet/0.0.1-beta.5/esri-leaflet.js"></script>
-<script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css">
-<link rel="stylesheet" href="https://unpkg.com/leaflet.pm@latest/dist/leaflet.pm.css" />
-<script src="https://unpkg.com/leaflet.pm@latest/dist/leaflet.pm.min.js"></script>
+{{--<script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>--}}
+<script src="/js/leaflet/esri-leaflet.js"></script>
+<script src="/js/leaflet/esri-leaflet-geocoder.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/leaflet/esri-leaflet-geocoder.css">
+<link rel="stylesheet" href="/css/leaflet/leaflet.pm.css" />
+<script src="/js/leaflet/leaflet.pm.min.js"></script>
 <script src="/js/leaflet-measure.js"></script>
 <script src="/js/leaflet.rotatedMarker.js"></script>
 </body>
