@@ -9,12 +9,15 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Route;
 use Validator;
 
 class AuthController extends Controller
 {
+    use ThrottlesLogins;
+    public $maxAttempts = 4;
+    public $decayMinutes = 1;
 
     public function apiLogin(Request $request){
         $data = [
@@ -30,12 +33,20 @@ class AuthController extends Controller
         ];
         $validator = Validator::make($data, $rules, $messages);
         if($validator->passes()) {
+            if ($this->hasTooManyLoginAttempts($request)) {
+                $this->fireLockoutEvent($request);
+                return response()->json([
+                    'status' => 417,
+                    'msg' => 'تعداد دفعات ورود ناموفق زیاد! شما ۱ دقیقه معلق شدید'
+                ]);
+            }
             $user = User::where(['username' => $data['username']])->first();
             if ($user && (Hash::check($data['password'] , $user->password))){
                 $user->lastLogin = Carbon::now()->toDateTimeString();
                 $user->save();
                 $loginLog = new LoginLog();
                 $loginLog->set(1,$data['username'],$user->id,$request->ip(),Carbon::now());
+                $this->clearLoginAttempts($request);
                 return response()->json([
                     'status' => 200,
                     "id" => $user->id,
@@ -43,6 +54,7 @@ class AuthController extends Controller
                     "lastName" => $user->lastName
                 ]);
             }else{
+                $this->incrementLoginAttempts($request);
                 $loginLog = new LoginLog();
                 $loginLog->set(2,$data['username'],null,$request->ip(),Carbon::now());
                 return response()->json([
@@ -51,6 +63,7 @@ class AuthController extends Controller
                 ]);
             }
         }else{
+            $this->incrementLoginAttempts($request);
             return response()->json([
                 'status' => 401,
                 'msg' => $validator->messages()
@@ -84,5 +97,10 @@ class AuthController extends Controller
             'status' => 200,
             'data' => LoginLog::all()
         ]);
+    }
+
+    public function username()
+    {
+        return 'username';
     }
 }

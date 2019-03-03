@@ -23,7 +23,7 @@
     {{-- convert to min later --}}
     <link href="/build/css/custom.css" rel="stylesheet">
 
-    <link rel="icon" href="/images/SepahLogo-min.png">
+    <link rel="icon" href="/images/Logo-min.png">
     <style>
         .loader {
             border: 5px solid #f3f3f3; /* Light grey */
@@ -86,7 +86,7 @@
     <div class="login_wrapper">
         <div class="animate form login_form login_form_cover">
             <section class="login_content">
-                <img height="70px" width="70px" style="margin-top: -11px" src="/images/SepahLogo-min.png"><br>
+                <img height="70px" width="70px" style="margin-top: -11px" src="/images/Logo-min.png"><br>
                 <form method="post" id="loginForm">
                     {{csrf_field()}}
                     <h2 style="color: #ffffff; margin-bottom: 45px; margin-top: 30px">سامانه مشاهده بلادرنگ پروازها</h2>

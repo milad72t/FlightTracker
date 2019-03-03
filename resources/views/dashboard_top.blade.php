@@ -38,7 +38,7 @@ $permittedForms = \Illuminate\Support\Facades\Cache::remember('PermForms_'.\Illu
 
     <!-- Custom Theme Style -->
     <link href="/build/css/custom.css" rel="stylesheet">
-    <link rel="icon" href="/images/SepahLogo-min.png">
+    <link rel="icon" href="/images/Logo-min.png">
     <link href="/css/left-side-modal.css" rel="stylesheet">
 </head>
 
@@ -48,7 +48,7 @@ $permittedForms = \Illuminate\Support\Facades\Cache::remember('PermForms_'.\Illu
         <div class="col-md-3 left_col">
             <div class="left_col scroll-view">
                 <div class="navbar nav_title" style="border: 0;">
-                    <a href="/dashboard" class="site_title"><img src="/images/SepahLogo-min.png" style=" height: 45px; width: 45px" >
+                    <a href="/dashboard" class="site_title"><img src="/images/Logo-min.png" style=" height: 45px; width: 45px" >
                         <span style="font-size: 12px">سامانه مشاهده پروازها</span></a>
                 </div>
                 <div class="clearfix"></div>
