@@ -13,7 +13,7 @@ udpSocket = socket(AF_INET, SOCK_DGRAM)
 
 def SerializeString(record):
   Flight = Flight_pb2.Flight()
-  randomFlightId = randint(1,20)
+  randomFlightId = randint(1,3000)
   Flight.flightId = randomFlightId
   Flight.altitude = randint(100,20000)
   Flight.speed = randint(100,400)
